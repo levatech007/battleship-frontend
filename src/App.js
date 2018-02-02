@@ -1,38 +1,34 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MyRoutes from './config/routes.js';
+
 
 class App extends Component {
   constructor() {
     super();
-    this.onClick = this.onClick.bind(this)
-  }
-
-  onClick(row, column) {
-    console.log("Square clicked!")
   }
 
   render() {
-    let gameBoard = new Array()
-    let gameRow = new Array(10);
-    gameRow.fill(0)
-    for(let i = 0; i < gameRow.length; i++) {
-      gameBoard.push(gameRow)
-    }
-
     return (
-      <div className='container'>
-            {
-              gameBoard.map((oneRow, rowIdx) => {
-                return( <div className='row justify-content-md-center'>
-                  {
-                    oneRow.map((oneSquare, colIdx) => {
-                      return( <div className='col-1 square' onClick={ () => this.onClick(rowIdx, colIdx) }></div> )
-                    })
-                  }
-                </div>)
-              })
-            }
+      <div className="App">
+        <header className="App-header">
+          <div className="row">
+            <div className="col-md-12">
+              <h1 className="App-title">Battleship</h1>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12 text-right">
+              <a id="about-link" href="">About</a>
+              <a href="">Instructions</a>
+            </div>
+          </div>
+        </header>
+        <div className='container'>
+          { MyRoutes }
+           
+        </div>
       </div>
     );
   }
