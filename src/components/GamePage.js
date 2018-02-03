@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Grid from './Grid';
 
 class GamePage extends Component {
   constructor() {
@@ -7,7 +8,7 @@ class GamePage extends Component {
     this.state = {
       allGuesses: ["A1", "A3", "B3", "C3", "B1", "C1", "D6", "E6", "D7", "G7", "A2", "B2"]
     }
-    this.onClick = this.onClick.bind(this)
+    this.onClick = this.onClick.bind(this);
   }
 
   onClick(row, column) {
@@ -15,12 +16,7 @@ class GamePage extends Component {
   }
 
   render() {
-    let gameBoard = new Array()
-    let gameRow = new Array(10);
-    gameRow.fill(0)
-    for(let i = 0; i < gameRow.length; i++) {
-      gameBoard.push(gameRow)
-    }
+ 
 
     return (
       <div className="container">
@@ -29,40 +25,11 @@ class GamePage extends Component {
           <div className="col-md-12 text-center">
             <h1>Stay out of hot water!</h1>
           </div>
-        </div>
+        </div> 
+        <Grid />
 
-        <div className="row">
-          <div className="col-md-6">
-            <h2>Place your battleships!</h2>
-            <div id="your-gameboard" className="gameboard">
-                {gameBoard.map((oneRow, rowIdx) => {
-                  return( <div className='row justify-content-md-center'>
-                    {
-                      oneRow.map((oneSquare, colIdx) => {
-                        return( <div className='col-1 square' onClick={ () => this.onClick(rowIdx, colIdx) }></div> )
-                      })
-                    }
-                    </div>)
-                  })
-                }
-            </div>
-          </div>
-          <div className="col-md-6">
-            <h2>Sink your opponent</h2>
-            <div id="your-gameboard" className="gameboard">
-                {gameBoard.map((oneRow, rowIdx) => {
-                  return( <div className='row justify-content-md-center'>
-                    {
-                      oneRow.map((oneSquare, colIdx) => {
-                        return( <div className='col-1 square' onClick={ () => this.onClick(rowIdx, colIdx) }></div> )
-                      })
-                    }
-                    </div>)
-                  })
-                }
-            </div>
-          </div>
-        </div>
+         
+
         <div className="row">
           <div className="col-md-6">
             <h2>High Scores</h2>
@@ -74,6 +41,7 @@ class GamePage extends Component {
                 <h4>AML - 690</h4>
               </ul>
           </div>
+
           <div className="col-md-6">
             <h2>Guesses</h2>
             <hr/>
@@ -85,6 +53,7 @@ class GamePage extends Component {
                 })
               }
             </div>
+
           </div>
         </div>
         <Link to={ '/' } className="btn btn-outline-info btn-lg">Return Home</Link>
