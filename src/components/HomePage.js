@@ -6,6 +6,26 @@ class HomePage extends Component {
   // constructor() {
   //   super();
   // }
+  hasClickedToPlay() {
+    fetch("http://localhost:8080/api/games", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        p1_position: [2,5],
+        p2_position: [1,3],
+        p1_guesses: [3,1],
+        p2_guesses: [7,3],
+        game_finished: false,
+      })
+    }).then((res) => {
+      return res.json()
+    }).then((json) => {
+      console.log(json)
+    })
+  }
 
   render() {
     return (
