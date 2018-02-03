@@ -47,7 +47,11 @@ a {
   font-family: 'Press Start 2P', cursive;
   text-decoration: none;
   color: white;
-  font-size: 1.5em;
+  font-size: 20px;
+}
+
+button {
+  font-family: 'Press Start 2P', cursive;
 }
 
 #about-link {
