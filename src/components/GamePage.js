@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Grid from './Grid';
 
 class GamePage extends Component {
   constructor() {
@@ -10,6 +11,7 @@ class GamePage extends Component {
     }
     this.onClick = this.onClick.bind(this);
     this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
+
   }
 
   onClick(row, column) {
@@ -67,6 +69,9 @@ class GamePage extends Component {
               <button className="btn btn-outline-success" onClick={this.hasClickedToPlay}>Start Game</button>
           </div>
         </div>
+        </div> 
+        <Grid />
+
         <div className="row">
           <div className="col-md-6">
             <h2>High Scores</h2>
@@ -78,6 +83,7 @@ class GamePage extends Component {
                 <h4>AML - 690</h4>
               </ul>
           </div>
+
           <div className="col-md-6">
             <h2>Guesses</h2>
             <hr/>
@@ -89,6 +95,7 @@ class GamePage extends Component {
                 })
               }
             </div>
+
           </div>
         </div>
         <Link to={ '/' } className="btn btn-outline-info btn-lg">Return Home</Link>
