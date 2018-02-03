@@ -6,29 +6,48 @@ class GamePage extends Component {
   constructor() {
     super();
     this.state = {
-      allGuesses: ["A1", "A3", "B3", "C3", "B1", "C1", "D6", "E6", "D7", "G7", "A2", "B2"]
+      allGuesses: ["A1", "A3", "B3", "C3", "B1", "C1", "D6", "E6", "D7", "G7", "A2", "B2"],
+      clickedStartGame: false
     }
-    this.onClick = this.onClick.bind(this);
+    this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
+
   }
 
-  onClick(row, column) {
-    console.log(`Clicked row ${row}, column ${column}`)
+  hasClickedToPlay() {
+    this.setState({
+      clickedStartGame: true
+    });
   }
 
   render() {
- 
 
+    const gameStarted = this.state.clickedStartGame;
+     
     return (
       <div className="container">
-
         <div className="row">
           <div className="col-md-12 text-center">
             <h1>Stay out of hot water!</h1>
           </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <h2>Your gameboard</h2>
+            <Grid />
+          </div>
+          {gameStarted ? (
+            <div className="col-md-6">
+              <h2>Sink your enemy</h2>
+              <Grid />
+            </div>
+            ) : (
+            <div className="col-md-6">
+              <h2>Place your battleships!</h2>
+                <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
+                <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
+            </div>
+          )}
         </div> 
-        <Grid />
-
-         
 
         <div className="row">
           <div className="col-md-6">
@@ -57,8 +76,9 @@ class GamePage extends Component {
           </div>
         </div>
         <Link to={ '/' } className="btn btn-outline-info btn-lg">Return Home</Link>
+        <Link to={ '/' } className="btn btn-outline-danger btn-lg">Quit Game</Link>
       </div>
-      )
+    )
   }
 }
 

@@ -37,7 +37,7 @@ class HomePage extends Component {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <Link to={ './gamepage' } className="btn btn-outline-success btn-lg">Start New Game</Link>
+            <Link to={ './gamepage' } className="btn btn-outline-success btn-lg">ENTER</Link>
           </div>
         </div>
       </div>
