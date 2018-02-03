@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import GamePage from './GamePage.js';
 
 class HomePage extends Component {
-  // constructor() {
-  //   super();
-  // }
+  constructor() {
+    super();
+    this.hasClickedToPlay = this.hasClickedToPlay.bind(this)
+  }
+
   hasClickedToPlay() {
     fetch("http://localhost:8080/api/games", {
       method: "POST",
@@ -37,7 +39,7 @@ class HomePage extends Component {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <Link to={ './gamepage' } className="btn btn-outline-success btn-lg">ENTER</Link>
+            <Link to={ './gamepage' } onClick={ () => this.hasClickedToPlay()} className="btn btn-outline-success btn-lg">ENTER</Link>
           </div>
         </div>
       </div>
