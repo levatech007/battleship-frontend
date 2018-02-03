@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MyRoutes from './config/routes.js';
+import Header from './components/Header.js';
 
 
 class App extends Component {
@@ -11,19 +12,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <div className="row">
-            <div className="col-md-12">
-              <h1 className="App-title">Battleship</h1>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-12 text-right">
-              <a id="about-link" href="">About</a>
-              <a href="">Instructions</a>
-            </div>
-          </div>
-        </header>
+        <Header />
         <div className='container'>
           { MyRoutes }
            
