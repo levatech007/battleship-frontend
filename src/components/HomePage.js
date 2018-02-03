@@ -16,10 +16,10 @@ class HomePage extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        p1_position: [2,5],
-        p2_position: [1,3],
-        p1_guesses: [3,1],
-        p2_guesses: [7,3],
+        p1_positions: [2,5],
+        p2_positions: [1,3],
+        p1_guesses: [2,4],
+        p2_guesses: [2,5],
         game_finished: false,
       })
     }).then((res) => {
