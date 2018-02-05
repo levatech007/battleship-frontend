@@ -38,7 +38,7 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-md-6">
             <h2>Your gameboard</h2>
-            <Grid />
+            <Grid  />
           </div>
           {gameStarted ? (
             <div className="col-md-6">
