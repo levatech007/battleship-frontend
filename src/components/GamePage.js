@@ -13,6 +13,10 @@ class GamePage extends Component {
 
   }
 
+  componentDidMount() {
+    // console.log(this.props.match.params.game_id);
+  }
+
   hasClickedToPlay() {
     this.setState({
       clickedStartGame: true
