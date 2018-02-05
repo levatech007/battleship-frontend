@@ -3,11 +3,22 @@ import React, { Component } from 'react';
 class Grid extends Component {
   constructor() {
     super();
+    this.state = {
+      playerBoxesClicked: []
+    }
+
     this.onBoxClick = this.onBoxClick.bind(this);
   }
 
+  // componentDidMount() {
+  //   console.log(this.props.match.params.post_id)
+  // }
+
   onBoxClick(row, column) {
     console.log(`Clicked row ${row}, column ${column}`)
+
+    console.log(`[${row}, ${column}]`)
+
     if (row===0) {
       document.getElementsByClassName('square')[column].style.backgroundColor = "gray"; 
     }else{
