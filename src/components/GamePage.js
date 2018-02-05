@@ -6,6 +6,7 @@ class GamePage extends Component {
   constructor() {
     super();
     this.state = {
+      p1_positions: [],
       allGuesses: ["A1", "A3", "B3", "C3", "B1", "C1", "D6", "E6", "D7", "G7", "A2", "B2"],
       clickedStartGame: false
     }
@@ -19,9 +20,13 @@ class GamePage extends Component {
     });
   }
 
+
+
   render() {
 
     const gameStarted = this.state.clickedStartGame;
+
+    
      
     return (
       <div className="container">
@@ -38,7 +43,7 @@ class GamePage extends Component {
           {gameStarted ? (
             <div className="col-md-6">
               <h2>Sink your enemy</h2>
-              <Grid />
+              <Grid   />
             </div>
             ) : (
             <div className="col-md-6">

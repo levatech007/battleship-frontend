@@ -3,7 +3,11 @@ import React, { Component } from 'react';
 class Grid extends Component {
   constructor() {
     super();
+    this.state = {
+    	color: "blue"
+    }
     this.onBoxClick = this.onBoxClick.bind(this);
+
   }
 
   onBoxClick(row, column) {
