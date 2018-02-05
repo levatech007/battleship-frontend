@@ -16,21 +16,24 @@ class Grid extends Component {
 
   onBoxClick(row, column) {
     console.log(`Clicked row ${row}, column ${column}`)
-    console.log(`[${row}, ${column}]`)
-    // console.log(this.props.match.params.game_id)
-    // this.setState({
-    //   playerBoxesClicked: 
-    // })
 
+    console.log(`[${row}, ${column}]`)
+
+    if (row===0) {
+      document.getElementsByClassName('square')[column].style.backgroundColor = "gray"; 
+    }else{
+    document.getElementsByClassName('square')[`${row}`+`${column}`].style.backgroundColor = "gray";
+    } 
   }
 
   render() {
 
   	let gameBoard = new Array()
   	let gameRow = new Array(10);
+    console.log(gameRow)
   	gameRow.fill(0)
   	for(let i = 0; i < gameRow.length; i++) {
-  		gameBoard.push(gameRow)
+  		gameBoard.push(gameRow) 
     }
 
     return (
