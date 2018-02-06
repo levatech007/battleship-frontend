@@ -117,7 +117,7 @@ class GamePage extends Component {
         </div>
         <div>
           <div>
-          { this.state.game_finished ? <OutcomeModal show={ this.state.showOutcome } close={ this.closeOutcomeModal } /> : null}
+          { this.state.game_finished ? <OutcomeModal show={ this.showOutcome } close={ this.closeOutcomeModal } /> : null}
           </div>
         </div>
         <div className="row">
