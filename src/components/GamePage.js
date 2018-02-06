@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Grid from './Grid';
-// import OutcomePage from './OutcomePage';
+import OutcomeModal from './OutcomeModal';
 
 class GamePage extends Component {
   constructor() {
     super();
     this.state = {
       p1_positions: [],
-      allGuesses: ["A1", "A3", "B3", "C3", "B1", "C1", "D6", "E6", "D7", "G7", "A2", "B2"],
+      p1_guesses: [],
+      allGuesses: [[3,1], [0,3], [8,3], [4,3], [2,1], [7,1], [6,6], [1,6], [0,7], [4,7], [7,2], [5,2]],
       clickedStartGame: false,
       playerBoxesClicked: [],
+      game_finished: false,
+      outcome: '',
+      score: []
     }
 
     this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
+    this.showOutcomeModal = this.showOutcomeModal.bind(this);
+    this.closeOutcomeModal = this.closeOutcomeModal.bind(this);
+    this.showOutcome = this.showOutcome.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +56,39 @@ class GamePage extends Component {
     });
   }
 
+  showOutcomeModal() {
+    this.setState({
+      showOutcomeModal: true
+    }) 
+  }
+
+  showOutcome() {
+    this.setState({
+      outcome: 'Win/Lose'
+    })
+  }
+
+  closeOutcomeModal() {
+    this.setState({
+      showOutcomeModal: false
+    })
+  }
+  // score() {
+    // var score = '';
+    // for(let i = 0; i < this.state.allGuesses.length; i++) {
+    //   for (let j = 0; j < this.state.p1_positions.length; j++) {
+    //     if (this.state.allGuesses[i] === this.state.p1_positions[j]) {
+    //       score = 'computer wins'
+    //     }
+    //   }
+    // }
+    // if (this.state.game_finished === true) {
+
+    //   this.setState({
+          
+    //     })
+    //   }
+    // }
 
   render() {
 
@@ -59,6 +99,11 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-md-12 text-center">
             <h1>Stay out of hot water!</h1>
+          </div>
+        </div>
+        <div>
+          <div>
+          { this.state.game_finished ? <OutcomeModal show={ this.state.showOutcome } close={ this.closeOutcomeModal } /> : null}
           </div>
         </div>
         <div className="row">
