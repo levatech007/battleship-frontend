@@ -13,10 +13,6 @@ class GamePage extends Component {
 
   }
 
-  componentDidMount() {
-    // console.log(this.props.match.params.game_id);
-  }
-
   hasClickedToPlay() {
     this.setState({
       clickedStartGame: true
@@ -55,7 +51,7 @@ class GamePage extends Component {
 
         <div className="row">
           <div className="col-md-6">
-            <h2>High Scores</h2>
+            <h2>High Scores</h2>/
             <hr/>
               <ul>
                 <h4>KJE - 850</h4>
@@ -69,8 +65,8 @@ class GamePage extends Component {
             <h2>Guesses</h2>
             <hr/>
             <div className="row">
-              {this.state.allGuesses.map(eachGuess => {
-                return <div className="col-md-4">
+              {this.state.allGuesses.map((eachGuess, idx) => {
+                return <div key={ idx } className="col-md-4">
                   <h3>{eachGuess}</h3>
                   </div>
                 })
