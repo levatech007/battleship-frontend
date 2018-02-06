@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Grid from './Grid';
 import OutcomeModal from './OutcomeModal';
+import PlayerGrid from './PlayerGrid';
+import OpponentGrid from './OpponentGrid';
+// import OutcomePage from './OutcomePage';
 
 class GamePage extends Component {
   constructor() {
@@ -9,15 +11,16 @@ class GamePage extends Component {
     this.state = {
       p1_positions: [],
       p1_guesses: [],
-      allGuesses: [[3,1], [0,3], [8,3], [4,3], [2,1], [7,1], [6,6], [1,6], [0,7], [4,7], [7,2], [5,2]],
-      clickedStartGame: false,
-      playerBoxesClicked: [],
       game_finished: false,
       outcome: '',
-      score: []
+      allGuesses: [],
+      clickedStartGame: false,
+      playerBoxesClicked: [],
+      opponentBoxesClicked: [],
     }
 
     this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
+    this.guessOpponentShip = this.guessOpponentShip.bind(this);
     this.showOutcomeModal = this.showOutcomeModal.bind(this);
     this.closeOutcomeModal = this.closeOutcomeModal.bind(this);
     this.showOutcome = this.showOutcome.bind(this);
@@ -48,7 +51,7 @@ class GamePage extends Component {
     }).then((res) => {
       return res.json();
     }).then((updatedPlayerShips) => {
-      console.log("p1_position ships updated with - ", updatedPlayerShips);
+      // console.log("p1_position ships updated with - ", updatedPlayerShips);
     });
     
     this.setState({
@@ -73,22 +76,33 @@ class GamePage extends Component {
       showOutcomeModal: false
     })
   }
-  // score() {
-    // var score = '';
-    // for(let i = 0; i < this.state.allGuesses.length; i++) {
-    //   for (let j = 0; j < this.state.p1_positions.length; j++) {
-    //     if (this.state.allGuesses[i] === this.state.p1_positions[j]) {
-    //       score = 'computer wins'
-    //     }
-    //   }
-    // }
-    // if (this.state.game_finished === true) {
 
-    //   this.setState({
-          
-    //     })
-    //   }
-    // }
+  sendOpponentBoxClick(row, column)  {
+    this.setState({
+      opponentBoxesClicked: this.state.opponentBoxesClicked.concat([[row, column]]),
+      allGuesses: this.state.opponentBoxesClicked.concat([[row, column]])
+    })
+    console.log(this.state.opponentBoxesClicked);
+  }
+
+  guessOpponentShip() {
+    let currentGameID = this.props.match.params.game_id;
+    fetch(`http://localhost:8080/api/games/${currentGameID}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        p1_guesses: this.state.opponentBoxesClicked
+      })
+    }).then((res) => {
+      return res.json();
+    }).then((updatedPlayerGuess) => {
+      console.log("found a match - ", updatedPlayerGuess);
+    });
+  }
+
 
   render() {
 
@@ -109,22 +123,37 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-md-6">
             <h2>Your gameboard</h2>
-            <Grid sendBoxClick={this.sendBoxClick.bind(this)} />
+            <PlayerGrid sendBoxClick={this.sendBoxClick.bind(this)} />
           </div>
           {gameStarted ? (          
             <div className="col-md-6">
               <h2>Sink your enemy</h2>
-              <Grid />
+              <OpponentGrid sendOpponentBoxClick={this.sendOpponentBoxClick.bind(this)}/>
             </div>
             ) : (
             <div className="col-md-6">
               <h2>Place your battleships!</h2>
               <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
+              <br/>
+              <ul>
+                <p>Carrier - 5 squares</p>
+                <p>Battleship - 4 squares</p>
+                <p>Cruiser - 3 squares</p>
+                <p>Submarine - 3 squares</p>
+                <p>Destroyer - 2 squares</p>
+              </ul>
+              <br/>
               <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
             </div>
           )}
         </div>
-
+        <br/>
+        <div className="row">
+          <div className="col-md-12">
+            <h4>Click a square on opponent's grid and make a guess</h4>
+            <button onClick={this.guessOpponentShip} className="btn btn-outline-info">Guess for a hit</button>
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-6">
             <h2>High Scores</h2>
@@ -150,7 +179,7 @@ class GamePage extends Component {
             </div>
           </div>
         </div>
-        <Link to={ '/' } className="btn btn-outline-info btn-lg">Return Home</Link>
+        <Link to={ '/' } className="btn btn-outline-primary btn-lg">Return Home</Link>
         <Link to={ '/' } className="btn btn-outline-danger btn-lg">Quit Game</Link>
       </div>
     )
