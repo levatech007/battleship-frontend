@@ -9,12 +9,14 @@ class GamePage extends Component {
     super();
     this.state = {
       p1_positions: [],
-      allGuesses: ["A1", "A3", "B3", "C3", "B1", "C1", "D6", "E6", "D7", "G7", "A2", "B2"],
+      allGuesses: [],
       clickedStartGame: false,
       playerBoxesClicked: [],
+      opponentBoxesClicked: [],
     }
 
     this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
+    this.guessOpponentShip = this.guessOpponentShip.bind(this);
   }
 
   componentDidMount() {
@@ -42,11 +44,37 @@ class GamePage extends Component {
     }).then((res) => {
       return res.json();
     }).then((updatedPlayerShips) => {
-      console.log("p1_position ships updated with - ", updatedPlayerShips);
+      // console.log("p1_position ships updated with - ", updatedPlayerShips);
     });
     
     this.setState({
       clickedStartGame: true
+    });
+  }
+
+  sendOpponentBoxClick(row, column)  {
+    this.setState({
+      opponentBoxesClicked: this.state.opponentBoxesClicked.concat([[row, column]]),
+      allGuesses: this.state.opponentBoxesClicked.concat([[row, column]])
+    })
+    console.log(this.state.opponentBoxesClicked);
+  }
+
+  guessOpponentShip() {
+    let currentGameID = this.props.match.params.game_id;
+    fetch(`http://localhost:8080/api/games/${currentGameID}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        p1_guesses: this.state.opponentBoxesClicked
+      })
+    }).then((res) => {
+      return res.json();
+    }).then((updatedPlayerGuess) => {
+      console.log("found a match - ", updatedPlayerGuess);
     });
   }
 
@@ -70,17 +98,32 @@ class GamePage extends Component {
           {gameStarted ? (          
             <div className="col-md-6">
               <h2>Sink your enemy</h2>
-              <OpponentGrid />
+              <OpponentGrid sendOpponentBoxClick={this.sendOpponentBoxClick.bind(this)}/>
             </div>
             ) : (
             <div className="col-md-6">
               <h2>Place your battleships!</h2>
               <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
+              <br/>
+              <ul>
+                <p>Carrier - 5 squares</p>
+                <p>Battleship - 4 squares</p>
+                <p>Cruiser - 3 squares</p>
+                <p>Submarine - 3 squares</p>
+                <p>Destroyer - 2 squares</p>
+              </ul>
+              <br/>
               <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
             </div>
           )}
         </div>
-
+        <br/>
+        <div className="row">
+          <div className="col-md-12">
+            <h4>Click a square on opponent's grid and make a guess</h4>
+            <button onClick={this.guessOpponentShip} className="btn btn-outline-info">Guess for a hit</button>
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-6">
             <h2>High Scores</h2>
@@ -106,7 +149,7 @@ class GamePage extends Component {
             </div>
           </div>
         </div>
-        <Link to={ '/' } className="btn btn-outline-info btn-lg">Return Home</Link>
+        <Link to={ '/' } className="btn btn-outline-primary btn-lg">Return Home</Link>
         <Link to={ '/' } className="btn btn-outline-danger btn-lg">Quit Game</Link>
       </div>
     )

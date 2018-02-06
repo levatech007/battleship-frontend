@@ -10,7 +10,7 @@ class OpponentGrid extends Component {
   }
 
   componentDidMount() {
-    console.log("Player Grid is here!");
+    console.log("Opponent Grid is here!");
   }
 
   componentWillMount() {
@@ -41,7 +41,7 @@ class OpponentGrid extends Component {
             return( <div key={ rowIdx } className='row justify-content-md-center'>
               {
                 oneRow.map((oneSquare, colIdx) => {
-                  return( <div key={ colIdx } className='col-1 square' style={ {backgroundColor: oneSquare }} onClick={ () => this.onBoxClick(rowIdx, colIdx) }></div> )
+                  return( <div key={ colIdx } className='col-1 square' style={ {backgroundColor: oneSquare }} onClick={ () => {this.onBoxClick(rowIdx, colIdx); this.props.sendOpponentBoxClick(rowIdx, colIdx)} }></div> )
                 })
               }
               </div>)
