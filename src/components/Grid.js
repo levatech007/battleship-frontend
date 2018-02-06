@@ -4,9 +4,10 @@ class Grid extends Component {
   constructor() {
     super();
     this.state = {
+      playerBoxesClicked: [],
       board : [[]],
     }
-        this.onBoxClick = this.onBoxClick.bind(this);
+    this.onBoxClick = this.onBoxClick.bind(this);
   }
 
   componentWillMount() {

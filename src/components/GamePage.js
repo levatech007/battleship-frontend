@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Grid from './Grid';
+import OutcomePage from './OutcomePage';
 
 class GamePage extends Component {
   constructor() {
     super();
     this.state = {
+      p1_positions: [],
       allGuesses: ["A1", "A3", "B3", "C3", "B1", "C1", "D6", "E6", "D7", "G7", "A2", "B2"],
       clickedStartGame: false
     }
@@ -19,35 +21,44 @@ class GamePage extends Component {
     });
   }
 
+
+
   render() {
 
     const gameStarted = this.state.clickedStartGame;
      
     return (
+      <div>
+      <OutcomePage />
       <div className="container">
         <div className="row">
           <div className="col-md-12 text-center">
             <h1>Stay out of hot water!</h1>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-6">
-            <h2>Your gameboard</h2>
-            <Grid />
-          </div>
           {gameStarted ? (
-            <div className="col-md-6">
-              <h2>Sink your enemy</h2>
-              <Grid />
+            <div className="row">
+              <div className="col-md-6">
+                <Grid />
+              </div>
+              <div className="col-md-6">
+                <Grid />
+              </div>
             </div>
-            ) : (
-            <div className="col-md-6">
-              <h2>Place your battleships!</h2>
-                <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
-                <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
+          ) : (
+            <div className="row">
+              <div className="col-md-6">
+                <h2>Sink your enemy</h2>
+                <Grid />
+              </div>
+              <div className="col-md-6">
+                <h2>Place your battleships!</h2>
+                  <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
+                  <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
+              </div>
             </div>
           )}
-        </div> 
+        </div>
 
         <div className="row">
           <div className="col-md-6">

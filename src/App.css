@@ -56,6 +56,7 @@ button {
 
 #about-link {
   margin-right: 25px;
+  color: blue;
 }
 
 #homepage-ship {
@@ -68,4 +69,17 @@ button {
   max-height: 100%;
 }
 
+#about { 
+  color: black;
+  font-family: 'Press Start 2P', cursive;
+ }
 
+#AboutModalLabel {
+  color: black;
+  font-family: 'Press Start 2P', cursive;
+}
+
+#InstructionsModalLabel {
+  color: black;
+  font-family: 'Press Start 2P', cursive;
+}
