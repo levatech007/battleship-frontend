@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Grid from './Grid';
+// import OutcomePage from './OutcomePage';
 
 class GamePage extends Component {
   constructor() {
     super();
     this.state = {
+      p1_positions: [],
       allGuesses: ["A1", "A3", "B3", "C3", "B1", "C1", "D6", "E6", "D7", "G7", "A2", "B2"],
       clickedStartGame: false,
       playerBoxesClicked: [],
     }
 
     this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
-    this.onBoxClick = this.onBoxClick.bind(this);
   }
 
   componentDidMount() {
     console.log("My game ID is:", this.props.match.params.game_id);
   }
 
-  onBoxClick(row, column) {
+  sendBoxClick(row, column) {
     this.setState({
       playerBoxesClicked: this.state.playerBoxesClicked.concat([[row, column]])
     })
@@ -48,6 +49,7 @@ class GamePage extends Component {
     });
   }
 
+
   render() {
 
     const gameStarted = this.state.clickedStartGame;
@@ -62,9 +64,9 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-md-6">
             <h2>Your gameboard</h2>
-            <Grid onBoxClick={this.onBoxClick.bind(this)} />
+            <Grid sendBoxClick={this.sendBoxClick.bind(this)} />
           </div>
-          {gameStarted ? (
+          {gameStarted ? (          
             <div className="col-md-6">
               <h2>Sink your enemy</h2>
               <Grid />
@@ -72,11 +74,11 @@ class GamePage extends Component {
             ) : (
             <div className="col-md-6">
               <h2>Place your battleships!</h2>
-                <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
-                <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
+              <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
+              <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
             </div>
           )}
-        </div> 
+        </div>
 
         <div className="row">
           <div className="col-md-6">
@@ -94,14 +96,13 @@ class GamePage extends Component {
             <h2>Guesses</h2>
             <hr/>
             <div className="row">
-              {this.state.allGuesses.map(eachGuess => {
-                return <div className="col-md-4">
+              {this.state.allGuesses.map((eachGuess, idx) => {
+                return <div key={ idx } className="col-md-4">
                   <h3>{eachGuess}</h3>
                   </div>
                 })
               }
             </div>
-
           </div>
         </div>
         <Link to={ '/' } className="btn btn-outline-info btn-lg">Return Home</Link>
