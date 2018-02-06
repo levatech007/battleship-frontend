@@ -23,7 +23,7 @@ class GamePage extends Component {
     this.setState({
       playerBoxesClicked: this.state.playerBoxesClicked.concat([[row, column]])
     })
-    console.log(this.state.playerBoxesClicked) 
+    console.log(this.state.playerBoxesClicked);
   }
 
   hasClickedToPlay() {
@@ -40,7 +40,7 @@ class GamePage extends Component {
     }).then((res) => {
       return res.json();
     }).then((updatedPlayerShips) => {
-      console.log("p1_position ships updated with - ", updatedPlayerShips)
+      console.log("p1_position ships updated with - ", updatedPlayerShips);
     });
     
     this.setState({
