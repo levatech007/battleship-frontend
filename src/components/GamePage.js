@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import OutcomeModal from './OutcomeModal';
 import PlayerGrid from './PlayerGrid';
 import OpponentGrid from './OpponentGrid';
 // import OutcomePage from './OutcomePage';
@@ -9,6 +10,9 @@ class GamePage extends Component {
     super();
     this.state = {
       p1_positions: [],
+      p1_guesses: [],
+      game_finished: false,
+      outcome: '',
       allGuesses: [],
       clickedStartGame: false,
       playerBoxesClicked: [],
@@ -17,6 +21,9 @@ class GamePage extends Component {
 
     this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
     this.guessOpponentShip = this.guessOpponentShip.bind(this);
+    this.showOutcomeModal = this.showOutcomeModal.bind(this);
+    this.closeOutcomeModal = this.closeOutcomeModal.bind(this);
+    this.showOutcome = this.showOutcome.bind(this);
   }
 
   componentDidMount() {
@@ -50,6 +57,24 @@ class GamePage extends Component {
     this.setState({
       clickedStartGame: true
     });
+  }
+
+  showOutcomeModal() {
+    this.setState({
+      showOutcomeModal: true
+    }) 
+  }
+
+  showOutcome() {
+    this.setState({
+      outcome: 'Win/Lose'
+    })
+  }
+
+  closeOutcomeModal() {
+    this.setState({
+      showOutcomeModal: false
+    })
   }
 
   sendOpponentBoxClick(row, column)  {
@@ -88,6 +113,11 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-md-12 text-center">
             <h1>Stay out of hot water!</h1>
+          </div>
+        </div>
+        <div>
+          <div>
+          { this.state.game_finished ? <OutcomeModal show={ this.state.showOutcome } close={ this.closeOutcomeModal } /> : null}
           </div>
         </div>
         <div className="row">
