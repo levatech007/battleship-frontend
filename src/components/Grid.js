@@ -4,49 +4,48 @@ class Grid extends Component {
   constructor() {
     super();
     this.state = {
-
-      playerBoxesClicked: []
+      playerBoxesClicked: [],
+      board : [[]],
     }
-
     this.onBoxClick = this.onBoxClick.bind(this);
-
   }
 
-  // componentDidMount() {
-  //   console.log(this.props.match.params.post_id)
-  // }
+  componentWillMount() {
+    let gameBoard = new Array()
+    for(let i = 0; i < 10; i++) {
+      let gameRow = new Array(10);
+      gameRow.fill(0)
+      gameBoard.push(gameRow) 
+    }
+    this.setState({
+      board: gameBoard,
+    })
+  }
 
   onBoxClick(row, column) {
     console.log(`Clicked row ${row}, column ${column}`)
 
-    console.log(`[${row}, ${column}]`)
+    let copiedBoard = this.state.board.slice();
 
-    if (row===0) {
-      document.getElementsByClassName('square')[column].style.backgroundColor = "gray"; 
-    }else{
-    document.getElementsByClassName('square')[`${row}`+`${column}`].style.backgroundColor = "gray";
-    } 
+    copiedBoard[row][column] = 'gray'
+
+    this.setState({
+      board: copiedBoard,
+    })
+
   }
 
   render() {
 
-  	let gameBoard = new Array()
-  	let gameRow = new Array(10);
-    console.log(gameRow)
-  	gameRow.fill(0)
-  	for(let i = 0; i < gameRow.length; i++) {
-  		gameBoard.push(gameRow) 
-    }
-
     return (
-	    <div id="your-gameboard" className="gameboard">
-	        {gameBoard.map((oneRow, rowIdx) => {
-	          return( <div className='row justify-content-md-center'>
-	            {
-	              oneRow.map((oneSquare, colIdx) => {
-	                return( <div className='col-1 square' onClick={ () => this.onBoxClick(rowIdx, colIdx) }></div> )
-	              })
-	            }
+      <div id="your-gameboard" className="gameboard">
+          {this.state.board.map((oneRow, rowIdx) => {
+            return( <div key={ rowIdx } className='row justify-content-md-center'>
+              {
+                oneRow.map((oneSquare, colIdx) => {
+                  return( <div key={ colIdx } className='col-1 square' style={ {backgroundColor: oneSquare }} onClick={ () => this.onBoxClick(rowIdx, colIdx) }></div> )
+                })
+              }
 	            </div>)
 	          })
 	        }
