@@ -7,28 +7,13 @@ class HomePage extends Component {
   constructor() {
     super();
     this.state = {
-      lastGameCreated: {},
-      
+      lastGameCreated: {}      
     }
 
     this.hasClickedEnterButton = this.hasClickedEnterButton.bind(this)
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/api/games").then( (res) => {
-      return res.json();
-    }).then( (json) => {
-      console.log("all the available games");
-      console.log(json);
-      this.setState({
-        lastGameCreated: json[json.length - 1]
-      })
-      console.log("Last game in DB");
-      console.log(this.state.lastGameCreated);
-    })
-  }
-
-  hasClickedEnterButton() {
     fetch("http://localhost:8080/api/games", {
       method: "POST",
       headers: {
@@ -45,24 +30,38 @@ class HomePage extends Component {
     }).then((res) => {
       return res.json()
     }).then((newEmptyGame) => {
-      console.log("ID of game that was just created with ENTER click");
-      console.log(newEmptyGame._id)
       this.setState({
         lastGameCreated: newEmptyGame
       });
-      console.log("setting the last game to be the newly created game");
-      console.log(this.state.lastGameCreated)
+      console.log("new empty game - ", this.state.lastGameCreated)
     })
-    // console.log(this.state.newlyCreatedGame)
 
-    // fetch("http://localhost:8080/api/games").then( (res) => {
-    //   return res.json();
-    // }).then( (json) => {
-    //   console.log(json);
-    //   this.setState({
-    //     newlyCreatedGame: json[json.length - 1]
+  }
+
+  hasClickedEnterButton() {
+    // fetch("http://localhost:8080/api/games", {
+    //   method: "POST",
+    //   headers: {
+    //     "Accept": "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     p1_positions: [2,5],
+    //     p2_positions: [1,3],
+    //     p1_guesses: [2,4],
+    //     p2_guesses: [2,5],
+    //     game_finished: false,
     //   })
-    //   console.log(this.state.newlyCreatedGame);
+    // }).then((res) => {
+    //   return res.json()
+    // }).then((newEmptyGame) => {
+    //   console.log("ID of game that was just created with ENTER click");
+    //   console.log(newEmptyGame._id)
+    //   this.setState({
+    //     lastGameCreated: newEmptyGame
+    //   });
+    //   console.log("setting the last game to be the newly created game");
+    //   console.log(this.state.lastGameCreated)
     // })
   }
 

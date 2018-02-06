@@ -7,17 +7,42 @@ class GamePage extends Component {
     super();
     this.state = {
       allGuesses: ["A1", "A3", "B3", "C3", "B1", "C1", "D6", "E6", "D7", "G7", "A2", "B2"],
-      clickedStartGame: false
+      clickedStartGame: false,
+      playerBoxesClicked: [],
     }
-    this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
 
+    this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
+    this.onBoxClick = this.onBoxClick.bind(this);
   }
 
   componentDidMount() {
-    // console.log(this.props.match.params.game_id);
+    console.log("My game ID is:", this.props.match.params.game_id);
+  }
+
+  onBoxClick(row, column) {
+    this.setState({
+      playerBoxesClicked: this.state.playerBoxesClicked.concat([[row, column]])
+    })
+    console.log(this.state.playerBoxesClicked) 
   }
 
   hasClickedToPlay() {
+    let currentGameID = this.props.match.params.game_id;
+    fetch(`http://localhost:8080/api/games/${currentGameID}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        p1_positions: this.state.playerBoxesClicked
+      })
+    }).then((res) => {
+      return res.json();
+    }).then((updatedPlayerShips) => {
+      console.log("p1_position ships updated with - ", updatedPlayerShips)
+    });
+    
     this.setState({
       clickedStartGame: true
     });
@@ -37,7 +62,7 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-md-6">
             <h2>Your gameboard</h2>
-            <Grid />
+            <Grid onBoxClick={this.onBoxClick.bind(this)} />
           </div>
           {gameStarted ? (
             <div className="col-md-6">
