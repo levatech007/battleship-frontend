@@ -4,10 +4,13 @@ class Grid extends Component {
   constructor() {
     super();
     this.state = {
-      playerBoxesClicked: [],
       board : [[]],
     }
     this.onBoxClick = this.onBoxClick.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("Grid is here!");
   }
 
   componentWillMount() {
@@ -23,27 +26,22 @@ class Grid extends Component {
   }
 
   onBoxClick(row, column) {
-    console.log(`Clicked row ${row}, column ${column}`)
-
+    console.log(`Clicked row ${row}, column ${column}`);
     let copiedBoard = this.state.board.slice();
-
     copiedBoard[row][column] = 'gray'
-
     this.setState({
       board: copiedBoard,
-    })
-
+    });
   }
 
   render() {
-
     return (
       <div id="your-gameboard" className="gameboard">
           {this.state.board.map((oneRow, rowIdx) => {
             return( <div key={ rowIdx } className='row justify-content-md-center'>
               {
                 oneRow.map((oneSquare, colIdx) => {
-                  return( <div key={ colIdx } className='col-1 square' style={ {backgroundColor: oneSquare }} onClick={ () => this.onBoxClick(rowIdx, colIdx) }></div> )
+                  return( <div key={ colIdx } className='col-1 square' style={ {backgroundColor: oneSquare }} onClick={ () => {this.onBoxClick(rowIdx, colIdx); this.props.sendBoxClick(rowIdx, colIdx)} }></div> )
                 })
               }
 	            </div>)
@@ -54,4 +52,4 @@ class Grid extends Component {
   }
 }
 
-export default Grid;
+export default Grid
