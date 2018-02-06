@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Grid extends Component {
+class PlayerGrid extends Component {
   constructor() {
     super();
     this.state = {
@@ -10,7 +10,7 @@ class Grid extends Component {
   }
 
   componentDidMount() {
-    console.log("Grid is here!");
+    console.log("Player Grid is here!");
   }
 
   componentWillMount() {
@@ -52,4 +52,4 @@ class Grid extends Component {
   }
 }
 
-export default Grid
+export default PlayerGrid

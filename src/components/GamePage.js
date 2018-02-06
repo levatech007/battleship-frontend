@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Grid from './Grid';
+import PlayerGrid from './PlayerGrid';
+import OpponentGrid from './OpponentGrid';
 // import OutcomePage from './OutcomePage';
 
 class GamePage extends Component {
@@ -64,12 +65,12 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-md-6">
             <h2>Your gameboard</h2>
-            <Grid sendBoxClick={this.sendBoxClick.bind(this)} />
+            <PlayerGrid sendBoxClick={this.sendBoxClick.bind(this)} />
           </div>
           {gameStarted ? (          
             <div className="col-md-6">
               <h2>Sink your enemy</h2>
-              <Grid />
+              <OpponentGrid />
             </div>
             ) : (
             <div className="col-md-6">
