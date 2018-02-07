@@ -127,7 +127,7 @@ class GamePage extends Component {
           </div>
           {gameStarted ? (          
             <div className="col-md-6">
-              <h2>Sink your enemy</h2>
+              <h2 className="sink-enemy">Sink your enemy</h2>
               <OpponentGrid sendOpponentBoxClick={this.sendOpponentBoxClick.bind(this)}/>
             </div>
             ) : (

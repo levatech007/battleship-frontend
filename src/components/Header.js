@@ -52,8 +52,8 @@ class Header extends Component {
           { this.state.showInstructionsModal ? <InstructionsModal close={ this.closeInstructionsModal }/> : null }
           <div className="row">
             <div className="col-md-12 text-right">
-              <button onClick={ this.showAboutModal } ref="about" >About</button>
-              <button onClick={ this.showInstructionsModal } ref="instructions" >Instructions</button>
+              <button onClick={ this.showAboutModal } ref="about" className="btn btn-secondary btn-sm about-button">About</button>
+              <button onClick={ this.showInstructionsModal } ref="instructions" className="btn btn-secondary btn-sm" >Instructions</button>
             </div>
           </div>
         </header>
