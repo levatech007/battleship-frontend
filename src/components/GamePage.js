@@ -49,7 +49,7 @@ class GamePage extends Component {
     }).then((updatedPlayerShips) => {
       // console.log("p1_position ships updated with - ", updatedPlayerShips);
     });
-    
+
     this.setState({
       clickedStartGame: true
     });
@@ -58,7 +58,7 @@ class GamePage extends Component {
   showOutcomeModal() {
     this.setState({
       showOutcomeModal: true
-    }) 
+    })
   }
 
   showOutcome() {
@@ -83,7 +83,7 @@ class GamePage extends Component {
   render() {
 
     const gameStarted = this.state.clickedStartGame;
-     
+
     return (
       <div className="container">
         <div className="row">
@@ -99,9 +99,9 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-md-6">
             <h2>Your gameboard</h2>
-            <PlayerGrid sendBoxClick={this.sendBoxClick.bind(this)} />
+            <PlayerGrid sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
           </div>
-          {gameStarted ? (          
+          {gameStarted ? (
             <div className="col-md-6">
               <h2>Sink your enemy</h2>
               <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>

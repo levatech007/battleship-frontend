@@ -18,7 +18,7 @@ class PlayerGrid extends Component {
     for(let i = 0; i < 10; i++) {
       let gameRow = new Array(10);
       gameRow.fill(0)
-      gameBoard.push(gameRow) 
+      gameBoard.push(gameRow)
     }
     this.setState({
       board: gameBoard,
@@ -26,11 +26,13 @@ class PlayerGrid extends Component {
   }
 
   onBoxClick(row, column) {
+    if(!this.props.gameStarted) {
     let copiedBoard = this.state.board.slice();
     copiedBoard[row][column] = 'aqua'
     this.setState({
       board: copiedBoard,
     });
+  }
   }
 
   render() {
