@@ -103,7 +103,7 @@ class GamePage extends Component {
           </div>
           {gameStarted ? (
             <div className="col-md-6">
-              <h2>Sink your enemy</h2>
+              <h2 className="sink-enemy">Sink your enemy</h2>
               <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
             </div>
             ) : (
