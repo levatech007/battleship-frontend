@@ -30,7 +30,7 @@ class OpponentGrid extends Component {
     console.log("single guess - ", singleGuess)
 
     let currentGameID = this.props.gameIdFromGamePage;
-    fetch(`https://lit-gorge-27220.herokuapp.com/games/${currentGameID}`, {
+    fetch(`https://lit-gorge-27220.herokuapp.com/api/games/${currentGameID}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
