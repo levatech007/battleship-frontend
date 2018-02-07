@@ -24,6 +24,7 @@ class GamePage extends Component {
     this.showOutcomeModal = this.showOutcomeModal.bind(this);
     this.closeOutcomeModal = this.closeOutcomeModal.bind(this);
     this.showOutcome = this.showOutcome.bind(this);
+    this.deleteGame = this.deleteGame.bind(this);
   }
 
   componentDidMount() {
@@ -51,9 +52,9 @@ class GamePage extends Component {
     }).then((res) => {
       return res.json();
     }).then((updatedPlayerShips) => {
-      // console.log("p1_position ships updated with - ", updatedPlayerShips);
+
     });
-    
+
     this.setState({
       clickedStartGame: true
     });
@@ -62,7 +63,7 @@ class GamePage extends Component {
   showOutcomeModal() {
     this.setState({
       showOutcomeModal: true
-    }) 
+    })
   }
 
   showOutcome() {
@@ -103,11 +104,20 @@ class GamePage extends Component {
     });
   }
 
+  deleteGame() {
+    let game_id = this.props.match.params.game_id;
+    fetch(`http://localhost:8080/api/games/${game_id}`, {
+      method: 'DELETE'
+    }).then((res) => {
+      console.log("Game deleted!")
+    });
+  }
+
 
   render() {
 
     const gameStarted = this.state.clickedStartGame;
-     
+
     return (
       <div className="container">
         <div className="row">
@@ -125,7 +135,7 @@ class GamePage extends Component {
             <h2>Your gameboard</h2>
             <PlayerGrid sendBoxClick={this.sendBoxClick.bind(this)} />
           </div>
-          {gameStarted ? (          
+          {gameStarted ? (
             <div className="col-md-6">
               <h2>Sink your enemy</h2>
               <OpponentGrid sendOpponentBoxClick={this.sendOpponentBoxClick.bind(this)}/>
@@ -180,7 +190,7 @@ class GamePage extends Component {
           </div>
         </div>
         <Link to={ '/' } className="btn btn-outline-primary btn-lg">Return Home</Link>
-        <Link to={ '/' } className="btn btn-outline-danger btn-lg">Quit Game</Link>
+        <Link to={ '/' } onQuitGameClick={ this.deleteGame() } className="btn btn-outline-danger btn-lg">Quit Game</Link>
       </div>
     )
   }
