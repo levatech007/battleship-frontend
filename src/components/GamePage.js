@@ -9,19 +9,14 @@ class GamePage extends Component {
   constructor() {
     super();
     this.state = {
-      p1_positions: [],
-      p1_guesses: [],
       game_finished: false,
       outcome: '',
       allOpponentBoxClicks: [],
       clickedStartGame: false,
       playerBoxesClicked: [],
-      // opponentBoxesClicked: [],
-      // isBoxRed: false,
     }
 
     this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
-    // this.guessOpponentShip = this.guessOpponentShip.bind(this);
     this.showOutcomeModal = this.showOutcomeModal.bind(this);
     this.closeOutcomeModal = this.closeOutcomeModal.bind(this);
     this.showOutcome = this.showOutcome.bind(this);
@@ -80,40 +75,10 @@ class GamePage extends Component {
 
   allOpponentBoxClicks(row, column)  {
     this.setState({
-      // opponentBoxesClicked: this.state.opponentBoxesClicked.concat([[row, column]]),
       allOpponentBoxClicks: this.state.allOpponentBoxClicks.concat([[row, column]])
     })
     console.log("on the GamePage - ", this.state.allOpponentBoxClicks);
   }
-
-  // guessOpponentShip() {
-  //   let currentGameID = this.props.match.params.game_id;
-  //   fetch(`http://localhost:8080/api/games/${currentGameID}`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       p1_guesses: this.state.opponentBoxesClicked
-  //     })
-  //   }).then((res) => {
-  //     return res.json();
-  //   }).then((updatedPlayerGuess) => {
-  //     console.log("found a match - ", updatedPlayerGuess);
-  //     // if(updatedPlayerGuess === true) {
-  //     //   console.log(this.state.isBoxRed)
-  //     //   this.setState({
-  //     //     isBoxRed: true
-  //     //   });
-  //     //   console.log(this.state.isBoxRed)
-  //     //   // this.setState({
-  //     //   //   isBoxRed: false
-  //     //   // })
-  //     // }
-  //   });
-  // }
-
 
   render() {
 
@@ -161,8 +126,8 @@ class GamePage extends Component {
         <br/>
         <div className="row">
           <div className="col-md-12">
-            <h4>Click a square on opponent's grid and make a guess</h4>
-            <button onClick={this.guessOpponentShip} className="btn btn-outline-info">Guess for a hit</button>
+            <h4>Click button for opponent's guess</h4>
+            <button className="btn btn-outline-info">Let opponent guess</button>
           </div>
         </div>
         <div className="row">

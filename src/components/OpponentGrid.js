@@ -5,8 +5,6 @@ class OpponentGrid extends Component {
     super();
     this.state = {
       board : [[]],
-      opponentBoxesClicked: [],
-      myGuesses: [],
     }
     this.onBoxClick = this.onBoxClick.bind(this);
   }
@@ -29,12 +27,7 @@ class OpponentGrid extends Component {
 
   onBoxClick(row, column) {
     let singleGuess = [row, column];
-    this.setState({
-      myGuesses: this.state.myGuesses.concat([singleGuess])
-    })
     console.log("single guess - ", singleGuess)
-    console.log("all guesses - ", this.state.myGuesses);
-    console.log("opponent page - ", this.props.gameIdFromGamePage)
 
     let currentGameID = this.props.gameIdFromGamePage;
     fetch(`http://localhost:8080/api/games/${currentGameID}`, {
@@ -48,31 +41,18 @@ class OpponentGrid extends Component {
       })
     }).then((res) => {
       return res.json();
-    }).then((updatedPlayerGuess) => {
-      console.log("found a match - ", updatedPlayerGuess);
-      // if(updatedPlayerGuess === true) {
-      //   console.log(this.state.isBoxRed)
-      //   this.setState({
-      //     isBoxRed: true
-      //   });
-      //   console.log(this.state.isBoxRed)
-      //   // this.setState({
-      //   //   isBoxRed: false
-      //   // })
+    }).then((matchWasFound) => {
+      console.log("found a match - ", matchWasFound);
+      let copiedBoard = this.state.board.slice();
+      if(matchWasFound) {
+        copiedBoard[row][column] = 'red'
+        } else {
+        copiedBoard[row][column] = 'lightgray'
+        }
+        this.setState({
+          board: copiedBoard,
+        });
       })
-
-    
-    // console.log(`Clicked row ${row}, column ${column}`);
-    let copiedBoard = this.state.board.slice();
-    if(this.props.turnRed) {
-      copiedBoard[row][column] = 'red'
-    } else {
-      copiedBoard[row][column] = 'gray'
-    }
-      this.setState({
-        board: copiedBoard,
-    });
-    
   }
 
   render() {
