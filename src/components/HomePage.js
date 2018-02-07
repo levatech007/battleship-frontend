@@ -14,7 +14,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/api/games", {
+    fetch("https://lit-gorge-27220.herokuapp.com/api/games", {
       method: "POST",
       headers: {
         "Accept": "application/json",
