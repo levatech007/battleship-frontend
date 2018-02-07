@@ -14,7 +14,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    fetch("https://lit-gorge-27220.herokuapp.com", {
+    fetch("https://lit-gorge-27220.herokuapp.com/api/games", {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -31,11 +31,9 @@ class HomePage extends Component {
       });
       console.log("new empty game - ", this.state.lastGameCreated)
     })
-
   }
 
   hasClickedEnterButton() {
-    
   }
 
   render() {
@@ -48,7 +46,7 @@ class HomePage extends Component {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <Link to={ `/gamepage/${this.state.lastGameCreated._id}` } onClick={ () => this.hasClickedEnterButton()} className="btn btn-outline-success btn-lg">ENTER</Link>
+            <Link to={ `/gamepage/${this.state.lastGameCreated._id}` } onClick={ () => this.hasClickedEnterButton() } className="btn btn-outline-success btn-lg">ENTER</Link>
           </div>
         </div>
       </div>
