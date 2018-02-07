@@ -9,32 +9,28 @@ class GamePage extends Component {
   constructor() {
     super();
     this.state = {
-      p1_positions: [],
-      p1_guesses: [],
       game_finished: false,
       outcome: '',
-      allGuesses: [],
+      allOpponentBoxClicks: [],
       clickedStartGame: false,
       playerBoxesClicked: [],
-      opponentBoxesClicked: [],
     }
 
     this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
-    this.guessOpponentShip = this.guessOpponentShip.bind(this);
     this.showOutcomeModal = this.showOutcomeModal.bind(this);
     this.closeOutcomeModal = this.closeOutcomeModal.bind(this);
     this.showOutcome = this.showOutcome.bind(this);
   }
 
   componentDidMount() {
-    console.log("My game ID is:", this.props.match.params.game_id);
+    console.log("My game ID from GamePage is:", this.props.match.params.game_id);
   }
 
   sendBoxClick(row, column) {
     this.setState({
       playerBoxesClicked: this.state.playerBoxesClicked.concat([[row, column]])
     })
-    console.log(this.state.playerBoxesClicked);
+    console.log("player ships on GamePage - ", this.state.playerBoxesClicked);
   }
 
   hasClickedToPlay() {
@@ -53,7 +49,7 @@ class GamePage extends Component {
     }).then((updatedPlayerShips) => {
       // console.log("p1_position ships updated with - ", updatedPlayerShips);
     });
-    
+
     this.setState({
       clickedStartGame: true
     });
@@ -62,7 +58,7 @@ class GamePage extends Component {
   showOutcomeModal() {
     this.setState({
       showOutcomeModal: true
-    }) 
+    })
   }
 
   showOutcome() {
@@ -77,37 +73,17 @@ class GamePage extends Component {
     })
   }
 
-  sendOpponentBoxClick(row, column)  {
+  allOpponentBoxClicks(row, column)  {
     this.setState({
-      opponentBoxesClicked: this.state.opponentBoxesClicked.concat([[row, column]]),
-      allGuesses: this.state.opponentBoxesClicked.concat([[row, column]])
+      allOpponentBoxClicks: this.state.allOpponentBoxClicks.concat([[row, column]])
     })
-    console.log(this.state.opponentBoxesClicked);
+    console.log("on the GamePage - ", this.state.allOpponentBoxClicks);
   }
-
-  guessOpponentShip() {
-    let currentGameID = this.props.match.params.game_id;
-    fetch(`http://localhost:8080/api/games/${currentGameID}`, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        p1_guesses: this.state.opponentBoxesClicked
-      })
-    }).then((res) => {
-      return res.json();
-    }).then((updatedPlayerGuess) => {
-      console.log("found a match - ", updatedPlayerGuess);
-    });
-  }
-
 
   render() {
 
     const gameStarted = this.state.clickedStartGame;
-     
+
     return (
       <div className="container">
         <div className="row">
@@ -123,12 +99,12 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-md-6">
             <h2>Your gameboard</h2>
-            <PlayerGrid sendBoxClick={this.sendBoxClick.bind(this)} />
+            <PlayerGrid sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
           </div>
-          {gameStarted ? (          
+          {gameStarted ? (
             <div className="col-md-6">
               <h2 className="sink-enemy">Sink your enemy</h2>
-              <OpponentGrid sendOpponentBoxClick={this.sendOpponentBoxClick.bind(this)}/>
+              <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
             </div>
             ) : (
             <div className="col-md-6">
@@ -150,8 +126,8 @@ class GamePage extends Component {
         <br/>
         <div className="row">
           <div className="col-md-12">
-            <h4>Click a square on opponent's grid and make a guess</h4>
-            <button onClick={this.guessOpponentShip} className="btn btn-outline-info">Guess for a hit</button>
+            <h4>Click button for opponent's guess</h4>
+            <button className="btn btn-outline-info">Let opponent guess</button>
           </div>
         </div>
         <div className="row">
@@ -170,7 +146,7 @@ class GamePage extends Component {
             <h2>Guesses</h2>
             <hr/>
             <div className="row">
-              {this.state.allGuesses.map((eachGuess, idx) => {
+              {this.state.allOpponentBoxClicks.map((eachGuess, idx) => {
                 return <div key={ idx } className="col-md-4">
                   <h3>{eachGuess}</h3>
                   </div>
