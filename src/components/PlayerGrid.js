@@ -27,9 +27,8 @@ class PlayerGrid extends Component {
 
   onBoxClick(row, column) {
     if(!this.props.gameStarted) {
-    console.log(`Clicked row ${row}, column ${column}`);
     let copiedBoard = this.state.board.slice();
-    copiedBoard[row][column] = 'gray'
+    copiedBoard[row][column] = 'aqua'
     this.setState({
       board: copiedBoard,
     });

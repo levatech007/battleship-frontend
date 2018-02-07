@@ -26,12 +26,33 @@ class OpponentGrid extends Component {
   }
 
   onBoxClick(row, column) {
-    console.log(`Clicked row ${row}, column ${column}`);
-    let copiedBoard = this.state.board.slice();
-    copiedBoard[row][column] = 'gray'
-    this.setState({
-      board: copiedBoard,
-    });
+    let singleGuess = [row, column];
+    console.log("single guess - ", singleGuess)
+
+    let currentGameID = this.props.gameIdFromGamePage;
+    fetch(`http://localhost:8080/api/games/${currentGameID}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        p1_guesses: singleGuess
+      })
+    }).then((res) => {
+      return res.json();
+    }).then((matchWasFound) => {
+      console.log("found a match - ", matchWasFound);
+      let copiedBoard = this.state.board.slice();
+      if(matchWasFound) {
+        copiedBoard[row][column] = 'red'
+        } else {
+        copiedBoard[row][column] = 'lightgray'
+        }
+        this.setState({
+          board: copiedBoard,
+        });
+      })
   }
 
   render() {
@@ -41,7 +62,7 @@ class OpponentGrid extends Component {
             return( <div key={ rowIdx } className='row justify-content-md-center'>
               {
                 oneRow.map((oneSquare, colIdx) => {
-                  return( <div key={ colIdx } className='col-1 square' style={ {backgroundColor: oneSquare }} onClick={ () => {this.onBoxClick(rowIdx, colIdx); this.props.sendOpponentBoxClick(rowIdx, colIdx)} }></div> )
+                  return( <div key={ colIdx } className='col-1 square' style={ {backgroundColor: oneSquare }} onClick={ () => {this.onBoxClick(rowIdx, colIdx); this.props.allOpponentBoxClicks(rowIdx, colIdx)} }></div> )
                 })
               }
               </div>)
