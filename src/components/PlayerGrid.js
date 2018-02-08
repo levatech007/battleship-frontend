@@ -7,6 +7,7 @@ class PlayerGrid extends Component {
       board : [[]],
     }
     this.onBoxClick = this.onBoxClick.bind(this);
+    this.opponentGuess = this.opponentGuess.bind(this);
   }
 
   componentDidMount() {
@@ -27,13 +28,51 @@ class PlayerGrid extends Component {
 
   onBoxClick(row, column) {
     if(!this.props.gameStarted) {
-    let copiedBoard = this.state.board.slice();
-    copiedBoard[row][column] = 'aqua'
-    this.setState({
-      board: copiedBoard,
-    });
+      let copiedBoard = this.state.board.slice();
+      copiedBoard[row][column] = 'aqua'
+      this.setState({
+        board: copiedBoard,
+      });
+    }
   }
-  }
+  opponentGuess() {
+   console.log("opponentGuess");
+   let currentGameID = this.props.gameIdFromGamePage;
+   fetch(`http://localhost:8080/api/games/${currentGameID}`, {
+     method: 'PUT',
+     headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({
+       computerPlay: true
+     })
+   }).then((res) => {
+     return res.json();
+   }).then((response) => {
+     console.log(response);
+       let copiedBoard = this.state.board.slice();
+       if(response) {
+         copiedBoard[response[0]][response[1]] = 'yellow'
+       }
+         this.setState({
+           board: copiedBoard,
+         });
+   });
+
+   fetch(`http://localhost:8080/api/games/${currentGameID}`)
+     .then((res) => {
+       return res.json(); // res cannot be read, need to convert to json
+     }).then((json) => {
+       if (json.p2_hits >= 6) {
+         console.log("You lose!")
+         // this.setState({game_finished: true});
+       } else {
+         console.log(json.p1_hits);
+         console.log(json.p2_hits);
+       }
+    })
+ }
 
   render() {
     return (
