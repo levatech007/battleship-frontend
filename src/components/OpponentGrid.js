@@ -47,7 +47,7 @@ class OpponentGrid extends Component {
       if(matchWasFound) {
         copiedBoard[row][column] = 'red'
         } else {
-        copiedBoard[row][column] = 'lightgray'
+        copiedBoard[row][column] = 'gray'
         }
         this.setState({
           board: copiedBoard,
@@ -59,9 +59,8 @@ class OpponentGrid extends Component {
           return res.json(); // res cannot be read, need to convert to json
         }).then((json) => {
           if (json.p1_hits >= 6) {
-            console.log("You win!")
-            let message = 'You win';
-            this.props.result(message)
+            let message = "You win";
+            this.props.isGameFinished(message)
           } else {
             console.log(json.p1_hits);
             console.log(json.p2_hits);
