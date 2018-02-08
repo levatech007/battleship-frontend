@@ -25,7 +25,7 @@ class HomePage extends Component {
       this.props.history.push(`/gamepage/${newEmptyGame._id}`)
     })
   }
-
+  
   render() {
     return (
       <div className="container">
