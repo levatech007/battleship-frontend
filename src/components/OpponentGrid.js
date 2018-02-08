@@ -73,7 +73,7 @@ class OpponentGrid extends Component {
     return (
       <div id="your-gameboard" className="gameboard">
           {this.state.board.map((oneRow, rowIdx) => {
-            return( <div key={ rowIdx } className='row justify-content-md-center'>
+            return( <div key={ rowIdx } className='row justify-content-center'>
               {
                 oneRow.map((oneSquare, colIdx) => {
                   return( <div key={ colIdx } className='col-1 square' style={ {backgroundColor: oneSquare }} onClick={ () => {this.onBoxClick(rowIdx, colIdx); this.props.allOpponentBoxClicks(rowIdx, colIdx)} }></div> )

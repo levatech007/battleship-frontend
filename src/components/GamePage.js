@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import OutcomeModal from './OutcomeModal';
 import PlayerGrid from './PlayerGrid';
 import OpponentGrid from './OpponentGrid';
+import FiveSquare from './FiveSquare.png';
+import FourSquare from './FourSquare.png';
+import ThreeSquare from './ThreeSquare.png';
+import TwoSquare from './TwoSquare.png';
+
+
+
 // import OutcomePage from './OutcomePage';
 
 class GamePage extends Component {
@@ -89,31 +96,29 @@ class GamePage extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-12 text-center">
+          <div className="col-12 text-center">
             <h1>Stay out of hot water!</h1>
           </div>
         </div>
         <div>
-          <div>
           { this.state.game_finished ? <OutcomeModal show={ this.state.showOutcome } close={ this.closeOutcomeModal } /> : null}
-          </div>
         </div>
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-12 col-md-12 col-lg-6">
             <div className="row">
-              <div className="col-md-1 all-letters-col">
+              <div className="col-1 all-letters-col">
                 {letters.map((eachLetter, idx) => {
-                    return <div key={ idx } className="col-md-12">
+                    return <div key={ idx } className="col-12">
                       <h5 className="one-letter">{eachLetter}</h5>
                       </div>
                     })
                   }
               </div>
-              <div className="col-md-11">
+              <div className="col-11">
                 <h2>Your gameboard</h2>
                 <div className="row all-numbers-row">
                   {numbers.map((eachNumber, idx) => {
-                      return <div className="col-md-1">
+                      return <div className="col-1">
                                 <div key={ idx }>
                                   <h5 className="one-number">{eachNumber}</h5>
                                 </div>
@@ -127,21 +132,21 @@ class GamePage extends Component {
           </div>
           
           {gameStarted ? (
-            <div className="col-md-6">
+            <div className="col-12 col-md-12 col-lg-6">
               <div className="row">
-                <div className="col-md-1 all-letters-col">
+                <div className="col-1 all-letters-col">
                 {letters.map((eachLetter, idx) => {
-                    return <div key={ idx } className="col-md-12">
+                    return <div key={ idx } className="col-12">
                       <h5 className="one-letter">{eachLetter}</h5>
                       </div>
                     })
                   }
                 </div>
-                <div className="col-md-11">
-                  <h2 className="sink-enemy">Sink your enemy</h2>
+                <div className="col-11">
+                  <h2 className="sink-enemy">Sink the enemy</h2>
                   <div className="row all-numbers-row">
                   {numbers.map((eachNumber, idx) => {
-                      return <div className="col-md-1">
+                      return <div className="col-1">
                                 <div key={ idx }>
                                   <h5 className="one-number">{eachNumber}</h5>
                                 </div>
@@ -154,16 +159,16 @@ class GamePage extends Component {
               </div>
             </div>
             ) : (
-            <div className="col-md-6">
+            <div className="col-12 col-md-12 col-lg-6">
               <h2>Place your battleships!</h2>
               <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
               <br/>
               <ul>
-                <p>Carrier - 5 squares</p>
-                <p>Battleship - 4 squares</p>
-                <p>Cruiser - 3 squares</p>
-                <p>Submarine - 3 squares</p>
-                <p>Destroyer - 2 squares</p>
+                <p>Carrier - <img className="squares" src={FiveSquare}/></p>
+                <p>Battleship - <img className="squares" src={FourSquare}/></p>
+                <p>Cruiser - <img className="squares" src={ThreeSquare}/></p>
+                <p>Submarine - <img className="squares" src={ThreeSquare}/></p>
+                <p>Destroyer - <img className="squares" src={TwoSquare}/></p>
               </ul>
               <br/>
               <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
@@ -172,13 +177,13 @@ class GamePage extends Component {
         </div>
         <br/>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-12">
             <h4>Click button for opponent's guess</h4>
             <button onClick={ () => this.refs.computerTurn.opponentGuess() } className="btn btn-outline-info">Let opponent guess</button>
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-12 col-md-6">
             <h2>High Scores</h2>
             <hr/>
               <ul>
@@ -189,12 +194,12 @@ class GamePage extends Component {
               </ul>
           </div>
 
-          <div className="col-md-6">
+          <div className="col-12 col-md-6">
             <h2>Guesses</h2>
             <hr/>
             <div className="row">
               {this.state.allOpponentBoxClicks.map((eachGuess, idx) => {
-                return <div key={ idx } className="col-md-3">
+                return <div key={ idx } className="col-3">
                   <h4>{letters[eachGuess[0]]}-{(eachGuess[1]+1)}</h4>
                   </div>
                 })
