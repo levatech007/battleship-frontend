@@ -7,7 +7,7 @@ import FiveSquare from './FiveSquare.png';
 import FourSquare from './FourSquare.png';
 import ThreeSquare from './ThreeSquare.png';
 import TwoSquare from './TwoSquare.png';
-// import OutcomePage from './OutcomePage';
+
 
 class GamePage extends Component {
   constructor() {
@@ -15,43 +15,37 @@ class GamePage extends Component {
     this.state = {
       game_finished: false,
       outcome: '',
+      showOutcomeModal: false,
       allOpponentBoxClicks: [],
       clickedStartGame: false,
       playerBoxesClicked: [],
     }
 
     this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
-    this.showOutcomeModal = this.showOutcomeModal.bind(this);
     this.closeOutcomeModal = this.closeOutcomeModal.bind(this);
-    this.showOutcome = this.showOutcome.bind(this);
-  }
-
-  componentDidMount() {
-    console.log("My game ID from GamePage is:", this.props.match.params.game_id);
+    this.gameFinished = this.gameFinished.bind(this);
   }
 
   sendBoxClick(row, column) {
     this.setState({
       playerBoxesClicked: this.state.playerBoxesClicked.concat([[row, column]])
     })
-    console.log("player ships on GamePage - ", this.state.playerBoxesClicked);
   }
 
   hasClickedToPlay() {
     let currentGameID = this.props.match.params.game_id;
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        p1_positions: this.state.playerBoxesClicked
-      })
-    }).then((res) => {
-      return res.json();
-    }).then((updatedPlayerShips) => {
-      // console.log("p1_position ships updated with - ", updatedPlayerShips);
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          p1_positions: this.state.playerBoxesClicked
+        })
+      }).then((res) => {
+        return res.json();
+      }).then((updatedPlayerShips) => {
     });
 
     this.setState({
@@ -59,21 +53,18 @@ class GamePage extends Component {
     });
   }
 
-  showOutcomeModal() {
+  gameFinished(message) {
     this.setState({
-      showOutcomeModal: true
-    })
-  }
-
-  showOutcome() {
-    this.setState({
-      outcome: 'Win/Lose'
+      game_finished: true, 
+      showOutcomeModal: true,
+      outcome: message
     })
   }
 
   closeOutcomeModal() {
     this.setState({
-      showOutcomeModal: false
+      showOutcomeModal: false,
+      game_finished: false
     })
   }
 
@@ -81,7 +72,6 @@ class GamePage extends Component {
     this.setState({
       allOpponentBoxClicks: [[row, column]].concat(this.state.allOpponentBoxClicks)
     })
-    console.log("on the GamePage - ", this.state.allOpponentBoxClicks);
   }
 
   render() {
@@ -98,7 +88,7 @@ class GamePage extends Component {
           </div>
         </div>
         <div>
-          { this.state.game_finished ? <OutcomeModal show={ this.state.showOutcome } close={ this.closeOutcomeModal } /> : null}
+          { this.state.game_finished ? <OutcomeModal close={this.closeOutcomeModal} result={this.state.outcome} /> : null}
         </div>
         <div className="row">
           <div className="col-12 col-md-12 col-lg-6">
@@ -123,7 +113,7 @@ class GamePage extends Component {
                     })
                   }
                 </div>
-                <PlayerGrid ref="computerTurn" gameIdFromGamePage={this.props.match.params.game_id} sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
+                <PlayerGrid ref="computerTurn" isGameFinished={this.gameFinished} gameIdFromGamePage={this.props.match.params.game_id} sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
               </div>
             </div>
           </div>
@@ -151,7 +141,7 @@ class GamePage extends Component {
                       })
                     }
                   </div>
-                  <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} showOutcomeModal={this.showOutcomeModal} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
+                  <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} showOutcomeModal={this.showOutcomeModal} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)} isGameFinished={this.gameFinished}/>
                 </div>
               </div>
             </div>

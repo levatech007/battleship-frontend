@@ -6,6 +6,7 @@ class PlayerGrid extends Component {
     this.state = {
       board : [[]],
       game_finished: false,
+      outcome: ''
     }
     this.onBoxClick = this.onBoxClick.bind(this);
     this.opponentGuess = this.opponentGuess.bind(this);
@@ -67,8 +68,10 @@ class PlayerGrid extends Component {
      .then((res) => {
        return res.json(); // res cannot be read, need to convert to json
      }).then((json) => {
-       if (json.p2_hits >= 6) {
-         console.log("You lose!")
+       if (json.p2_hits >= 5) {
+         let message = "You lose";
+         this.props.isGameFinished(message)
+
        } else {
          console.log(json.p1_hits);
          console.log(json.p2_hits);
