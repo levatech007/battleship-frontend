@@ -122,7 +122,8 @@ button, .btn {
   max-height: 100%;
 }
 
-#about { 
+#about,
+#instructions { 
   color: black;
   font-family: 'Press Start 2P', cursive;
  }

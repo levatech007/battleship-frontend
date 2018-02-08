@@ -18,7 +18,13 @@ class InstructionsModal extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                
+                <ul id="instructions">
+                  <p>Place your ships by clicking squares on your gameboard.</p> 
+                  <p>After you have placed your ships, click the 'Start Game' button.</p> 
+                  <p>Click the enemy grid to make a guess.</p> 
+                  <p>After each guess, click the button below the grids to allow the opponent to guess your ship locations.</p> 
+                  <p>The first player to make 17 hits wins the game.</p> 
+                </ul>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" onClick={ this.props.close }>Close</button>
