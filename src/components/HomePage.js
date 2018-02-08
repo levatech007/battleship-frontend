@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import GamePage from './GamePage.js';
 import Ship from './battleship-with-pixels.png';
 
 class HomePage extends Component {
@@ -45,7 +44,3 @@ class HomePage extends Component {
 }
 
 export default HomePage
-
-// https://static-pss-eu.wgcdn.co/shop/media/items/1c/b1/1cb113ec539d47dcb26f8d06cbb132b8.png
-
-// https://s-media-cache-ak0.pinimg.com/originals/6b/73/5c/6b735c853ff4caed8a37816dda58ea85.jpg

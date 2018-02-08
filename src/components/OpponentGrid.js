@@ -14,7 +14,7 @@ class OpponentGrid extends Component {
   }
 
   componentWillMount() {
-    let gameBoard = new Array()
+    let gameBoard = [];
     for(let i = 0; i < 10; i++) {
       let gameRow = new Array(10);
       gameRow.fill(0)
@@ -58,8 +58,8 @@ class OpponentGrid extends Component {
         .then((res) => {
           return res.json(); // res cannot be read, need to convert to json
         }).then((json) => {
-          if (json.p1_hits >= 6) {
-            let message = "You win";
+          if (json.p1_hits >= 16) {
+            let message = "You win!";
             this.props.isGameFinished(message)
           } else {
             console.log(json.p1_hits);

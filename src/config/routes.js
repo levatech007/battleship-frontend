@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from '../components/HomePage.js';
 import GamePage from '../components/GamePage.js';
