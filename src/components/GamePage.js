@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import OutcomeModal from './OutcomeModal';
 import PlayerGrid from './PlayerGrid';
 import OpponentGrid from './OpponentGrid';
-// import OutcomePage from './OutcomePage';
 
 class GamePage extends Component {
   constructor() {
@@ -53,6 +52,13 @@ class GamePage extends Component {
     this.setState({
       clickedStartGame: true
     });
+  }
+
+  onGameFinished(){
+    this.setState({
+      game_finished: true
+    })
+
   }
 
   showOutcomeModal() {
@@ -121,7 +127,7 @@ class GamePage extends Component {
                       })
                     }
                 </div>
-                <PlayerGrid ref="computerTurn" gameIdFromGamePage={this.props.match.params.game_id} sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
+                <PlayerGrid ref="computerTurn" onGameFinished={ this.onGameFinished } gameIdFromGamePage={this.props.match.params.game_id} sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
               </div>
             </div>
           </div>
@@ -141,7 +147,7 @@ class GamePage extends Component {
                   <h2 className="sink-enemy">Sink your enemy</h2>
                   <div className="row all-numbers-row">
                   {numbers.map((eachNumber, idx) => {
-                      return <div className="col-md-1">
+                      return <div className="col-md-1" key={ idx }>
                                 <div key={ idx }>
                                   <h5 className="one-number">{eachNumber}</h5>
                                 </div>
@@ -149,7 +155,7 @@ class GamePage extends Component {
                       })
                     }
                   </div>
-                  <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
+                  <OpponentGrid onGameFinished={ this.onGameFinished } gameIdFromGamePage={this.props.match.params.game_id} showOutcomeModal={this.showOutcomeModal} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
                 </div>
               </div>
             </div>

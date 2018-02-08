@@ -59,8 +59,7 @@ class OpponentGrid extends Component {
           return res.json(); // res cannot be read, need to convert to json
         }).then((json) => {
           if (json.p1_hits >= 6) {
-            console.log("You win!")
-            this.setState({game_finished: true});
+            this.props.showOutcomeModal
           } else {
             console.log(json.p1_hits);
             console.log(json.p2_hits);
