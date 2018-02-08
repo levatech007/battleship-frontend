@@ -67,10 +67,10 @@ class PlayerGrid extends Component {
      .then((res) => {
        return res.json(); // res cannot be read, need to convert to json
      }).then((json) => {
-       if (json.p2_hits >= 6) {
+       if (json.p2_hits >= 5) {
          console.log("You lose!")
 
-         this.props.isGameFinished
+         this.props.isGameFinished()
 
        } else {
          console.log(json.p1_hits);

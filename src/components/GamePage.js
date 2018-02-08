@@ -24,6 +24,7 @@ class GamePage extends Component {
     this.showOutcomeModal = this.showOutcomeModal.bind(this);
     this.closeOutcomeModal = this.closeOutcomeModal.bind(this);
     this.showOutcome = this.showOutcome.bind(this);
+    this.gameFinished = this.gameFinished.bind(this);
   }
 
   componentDidMount() {
