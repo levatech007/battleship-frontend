@@ -35,7 +35,7 @@ class GamePage extends Component {
 
   hasClickedToPlay() {
     let currentGameID = this.props.match.params.game_id;
-    fetch(`https://lit-gorge-27220.herokuapp.com/api/games/${currentGameID}`, {
+    fetch(`http://localhost:8080/api/games/${currentGameID}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -125,7 +125,7 @@ class GamePage extends Component {
               </div>
             </div>
           </div>
-          
+
           {gameStarted ? (
             <div className="col-md-6">
               <div className="row">
