@@ -30,7 +30,7 @@ class OpponentGrid extends Component {
     console.log("single guess - ", singleGuess)
 
     let currentGameID = this.props.gameIdFromGamePage;
-    fetch(`https://lit-gorge-27220.herokuapp.com/api/games/${currentGameID}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -54,13 +54,12 @@ class OpponentGrid extends Component {
         });
       })
 
-      fetch(`http://localhost:8080/api/games/${currentGameID}`)
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`)
         .then((res) => {
           return res.json(); // res cannot be read, need to convert to json
         }).then((json) => {
           if (json.p1_hits >= 6) {
             console.log("You win!")
-            this.setState({game_finished: true});
           } else {
             console.log(json.p1_hits);
             console.log(json.p2_hits);

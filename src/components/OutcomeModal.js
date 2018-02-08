@@ -18,7 +18,7 @@ class OutcomeModal extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                
+
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" onClick={ this.props.close }>Close</button>

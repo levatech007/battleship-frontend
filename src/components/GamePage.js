@@ -7,9 +7,6 @@ import FiveSquare from './FiveSquare.png';
 import FourSquare from './FourSquare.png';
 import ThreeSquare from './ThreeSquare.png';
 import TwoSquare from './TwoSquare.png';
-
-
-
 // import OutcomePage from './OutcomePage';
 
 class GamePage extends Component {
@@ -42,7 +39,7 @@ class GamePage extends Component {
 
   hasClickedToPlay() {
     let currentGameID = this.props.match.params.game_id;
-    fetch(`https://lit-gorge-27220.herokuapp.com/api/games/${currentGameID}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -118,19 +115,19 @@ class GamePage extends Component {
                 <h2>Your gameboard</h2>
                 <div className="row all-numbers-row">
                   {numbers.map((eachNumber, idx) => {
-                      return <div className="col-1">
-                                <div key={ idx }>
-                                  <h5 className="one-number">{eachNumber}</h5>
-                                </div>
+                    return <div key={ idx } className="col-1">
+                              <div>
+                                <h5 className="one-number">{eachNumber}</h5>
                               </div>
-                      })
-                    }
+                            </div>
+                    })
+                  }
                 </div>
                 <PlayerGrid ref="computerTurn" gameIdFromGamePage={this.props.match.params.game_id} sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
               </div>
             </div>
           </div>
-          
+
           {gameStarted ? (
             <div className="col-12 col-md-12 col-lg-6">
               <div className="row">
@@ -154,7 +151,7 @@ class GamePage extends Component {
                       })
                     }
                   </div>
-                  <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
+                  <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} showOutcomeModal={this.showOutcomeModal} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
                 </div>
               </div>
             </div>
