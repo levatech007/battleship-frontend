@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class OutcomeModal extends Component {
   constructor() {
@@ -13,15 +14,13 @@ class OutcomeModal extends Component {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="OutcomeModalLabel">Outcome</h5>
-                <button type="button" className="close" onClick={ this.props.close }>
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
               <div className="modal-body">
-
+                <h2 className="display-3">{this.props.result}</h2>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={ this.props.close }>Close</button>
+              <Link to={ '/' } className="btn btn-outline-danger btn-lg">Start New Game</Link>
+                
               </div>
             </div>
           </div>
