@@ -121,7 +121,7 @@ class GamePage extends Component {
                       })
                     }
                 </div>
-                <PlayerGrid sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
+                <PlayerGrid ref="computerTurn" gameIdFromGamePage={this.props.match.params.game_id} sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-md-12">
             <h4>Click button for opponent's guess</h4>
-            <button className="btn btn-outline-info">Let opponent guess</button>
+            <button onClick={ () => this.refs.computerTurn.opponentGuess() } className="btn btn-outline-info">Let opponent guess</button>
           </div>
         </div>
         <div className="row">

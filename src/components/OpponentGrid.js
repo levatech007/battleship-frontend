@@ -18,7 +18,7 @@ class OpponentGrid extends Component {
     for(let i = 0; i < 10; i++) {
       let gameRow = new Array(10);
       gameRow.fill(0)
-      gameBoard.push(gameRow) 
+      gameBoard.push(gameRow)
     }
     this.setState({
       board: gameBoard,
@@ -53,6 +53,20 @@ class OpponentGrid extends Component {
           board: copiedBoard,
         });
       })
+
+      fetch(`http://localhost:8080/api/games/${currentGameID}`)
+        .then((res) => {
+          return res.json(); // res cannot be read, need to convert to json
+        }).then((json) => {
+          if (json.p1_hits >= 6) {
+            console.log("You win!")
+            this.setState({game_finished: true});
+          } else {
+            console.log(json.p1_hits);
+            console.log(json.p2_hits);
+        }
+
+    });
   }
 
   render() {
