@@ -68,7 +68,7 @@ class PlayerGrid extends Component {
        return res.json(); // res cannot be read, need to convert to json
      }).then((json) => {
        if (json.p2_hits >= 6) {
-         this.props.showOutcomeModal
+         console.log("You lose!")
        } else {
          console.log(json.p1_hits);
          console.log(json.p2_hits);

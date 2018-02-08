@@ -54,13 +54,6 @@ class GamePage extends Component {
     });
   }
 
-  onGameFinished(){
-    this.setState({
-      game_finished: true
-    })
-
-  }
-
   showOutcomeModal() {
     this.setState({
       showOutcomeModal: true
@@ -127,7 +120,7 @@ class GamePage extends Component {
                       })
                     }
                 </div>
-                <PlayerGrid ref="computerTurn" onGameFinished={ this.onGameFinished } gameIdFromGamePage={this.props.match.params.game_id} sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
+                <PlayerGrid ref="computerTurn" gameIdFromGamePage={this.props.match.params.game_id} sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
               </div>
             </div>
           </div>
@@ -155,7 +148,7 @@ class GamePage extends Component {
                       })
                     }
                   </div>
-                  <OpponentGrid onGameFinished={ this.onGameFinished } gameIdFromGamePage={this.props.match.params.game_id} showOutcomeModal={this.showOutcomeModal} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
+                  <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} showOutcomeModal={this.showOutcomeModal} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
                 </div>
               </div>
             </div>
