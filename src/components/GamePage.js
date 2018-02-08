@@ -35,7 +35,7 @@ class GamePage extends Component {
 
   hasClickedToPlay() {
     let currentGameID = this.props.match.params.game_id;
-    fetch(`http://localhost:8080/api/games/${currentGameID}`, {
+    fetch(`https://lit-gorge-27220.herokuapp.com/api/games/${currentGameID}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -75,7 +75,7 @@ class GamePage extends Component {
 
   allOpponentBoxClicks(row, column)  {
     this.setState({
-      allOpponentBoxClicks: this.state.allOpponentBoxClicks.concat([[row, column]])
+      allOpponentBoxClicks: [[row, column]].concat(this.state.allOpponentBoxClicks)
     })
     console.log("on the GamePage - ", this.state.allOpponentBoxClicks);
   }
@@ -83,6 +83,8 @@ class GamePage extends Component {
   render() {
 
     const gameStarted = this.state.clickedStartGame;
+    const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     return (
       <div className="container">
@@ -98,13 +100,58 @@ class GamePage extends Component {
         </div>
         <div className="row">
           <div className="col-md-6">
-            <h2>Your gameboard</h2>
-            <PlayerGrid ref="computerTurn" gameIdFromGamePage={this.props.match.params.game_id} sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
+            <div className="row">
+              <div className="col-md-1 all-letters-col">
+                {letters.map((eachLetter, idx) => {
+                    return <div key={ idx } className="col-md-12">
+                      <h5 className="one-letter">{eachLetter}</h5>
+                      </div>
+                    })
+                  }
+              </div>
+              <div className="col-md-11">
+                <h2>Your gameboard</h2>
+                <div className="row all-numbers-row">
+                  {numbers.map((eachNumber, idx) => {
+                      return <div className="col-md-1">
+                                <div key={ idx }>
+                                  <h5 className="one-number">{eachNumber}</h5>
+                                </div>
+                              </div>
+                      })
+                    }
+                </div>
+                <PlayerGrid ref="computerTurn" gameIdFromGamePage={this.props.match.params.game_id} sendBoxClick={this.sendBoxClick.bind(this)} gameStarted={ this.state.clickedStartGame}/>
+              </div>
+            </div>
           </div>
+          
           {gameStarted ? (
             <div className="col-md-6">
-              <h2 className="sink-enemy">Sink your enemy</h2>
-              <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
+              <div className="row">
+                <div className="col-md-1 all-letters-col">
+                {letters.map((eachLetter, idx) => {
+                    return <div key={ idx } className="col-md-12">
+                      <h5 className="one-letter">{eachLetter}</h5>
+                      </div>
+                    })
+                  }
+                </div>
+                <div className="col-md-11">
+                  <h2 className="sink-enemy">Sink your enemy</h2>
+                  <div className="row all-numbers-row">
+                  {numbers.map((eachNumber, idx) => {
+                      return <div className="col-md-1">
+                                <div key={ idx }>
+                                  <h5 className="one-number">{eachNumber}</h5>
+                                </div>
+                              </div>
+                      })
+                    }
+                  </div>
+                  <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
+                </div>
+              </div>
             </div>
             ) : (
             <div className="col-md-6">
@@ -147,8 +194,8 @@ class GamePage extends Component {
             <hr/>
             <div className="row">
               {this.state.allOpponentBoxClicks.map((eachGuess, idx) => {
-                return <div key={ idx } className="col-md-4">
-                  <h3>{eachGuess}</h3>
+                return <div key={ idx } className="col-md-3">
+                  <h4>{letters[eachGuess[0]]}-{(eachGuess[1]+1)}</h4>
                   </div>
                 })
               }

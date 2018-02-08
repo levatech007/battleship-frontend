@@ -55,6 +55,28 @@ h2 {
 
 h4 {
   font-family: 'Press Start 2P', cursive;
+  color: white;
+}
+
+
+.all-letters-col {
+  padding-top: 110px;
+}
+
+.one-letter {
+  line-height: 39px;
+}
+
+.col-md-11 {
+  padding: 0px;
+}
+
+.one-number {
+  margin-left: 40px;
+}
+
+.all-numbers-row {
+  margin-bottom: 5px;
 }
 
 h5 {
