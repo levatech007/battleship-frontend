@@ -12,10 +12,6 @@ class PlayerGrid extends Component {
     this.opponentGuess = this.opponentGuess.bind(this);
   }
 
-  componentDidMount() {
-    console.log("Player Grid is here!");
-  }
-
   componentWillMount() {
     let gameBoard = [];
     for(let i = 0; i < 10; i++) {
@@ -37,6 +33,7 @@ class PlayerGrid extends Component {
       });
     }
   }
+  
   opponentGuess() {
    console.log("opponentGuess");
    let currentGameID = this.props.gameIdFromGamePage;

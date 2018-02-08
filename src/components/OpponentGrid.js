@@ -9,10 +9,6 @@ class OpponentGrid extends Component {
     this.onBoxClick = this.onBoxClick.bind(this);
   }
 
-  componentDidMount() {
-    console.log("Opponent Grid is here!");
-  }
-
   componentWillMount() {
     let gameBoard = [];
     for(let i = 0; i < 10; i++) {
