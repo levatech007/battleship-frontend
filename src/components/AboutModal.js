@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'; 
 
 class Modal extends Component {
-  constructor() {
-    super();
-  }
 
   render() {
-
     return (
         <div className="modal fade show" style={{display: 'block'}}>
           <div className="modal-dialog" role="document">

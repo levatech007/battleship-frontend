@@ -12,7 +12,7 @@ class Header extends Component {
     this.showAboutModal = this.showAboutModal.bind(this);
     this.showInstructionsModal = this.showInstructionsModal.bind(this);
     this.closeAboutModal = this.closeAboutModal.bind(this);
-    this.closeInstructionsModal = this. closeInstructionsModal.bind(this);
+    this.closeInstructionsModal = this.closeInstructionsModal.bind(this);
   }
 
   showAboutModal() {

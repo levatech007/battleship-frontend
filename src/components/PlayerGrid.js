@@ -12,12 +12,8 @@ class PlayerGrid extends Component {
     this.opponentGuess = this.opponentGuess.bind(this);
   }
 
-  componentDidMount() {
-    console.log("Player Grid is here!");
-  }
-
   componentWillMount() {
-    let gameBoard = new Array()
+    let gameBoard = [];
     for(let i = 0; i < 10; i++) {
       let gameRow = new Array(10);
       gameRow.fill(0)
@@ -37,6 +33,7 @@ class PlayerGrid extends Component {
       });
     }
   }
+  
   opponentGuess() {
    console.log("opponentGuess");
    let currentGameID = this.props.gameIdFromGamePage;
@@ -68,8 +65,8 @@ class PlayerGrid extends Component {
      .then((res) => {
        return res.json(); // res cannot be read, need to convert to json
      }).then((json) => {
-       if (json.p2_hits >= 5) {
-         let message = "You lose";
+       if (json.p2_hits >= 16) {
+         let message = "You lose!";
          this.props.isGameFinished(message)
 
        } else {

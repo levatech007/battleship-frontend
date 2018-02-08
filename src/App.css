@@ -2,18 +2,9 @@ body {
   background: black;
 }
 
-.square {
-  border: 1px solid white;
-  height: 46px;
-}
-
+/*HEADER*/
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
 }
 
 .App-header {
@@ -28,20 +19,16 @@ body {
   color: white;
 }
 
-.App-intro {
-  font-size: large;
+#about-link {
+  margin-right: 25px;
+  color: blue;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
+/*GENERAL*/
 h1 {
   font-family: 'Press Start 2P', cursive;
   color: yellow;
 }
-
 
 h2 {
   font-family: 'Press Start 2P', cursive;
@@ -56,27 +43,6 @@ h2 {
 h4 {
   font-family: 'Press Start 2P', cursive;
   color: white;
-}
-
-
-.all-letters-col {
-  padding-top: 110px;
-}
-
-.one-letter {
-  line-height: 39px;
-}
-
-.col-md-11 {
-  padding: 0px;
-}
-
-.one-number {
-  margin-left: 40px;
-}
-
-.all-numbers-row {
-  margin-bottom: 5px;
 }
 
 h5 {
@@ -107,14 +73,20 @@ button, .btn {
   margin: 5px;
 }
 
-#about-link {
-  margin-right: 25px;
-  color: blue;
-}
-
 #homepage-ship {
   width: 800px; 
   height: 500px;
+}
+
+hr {
+  background-color: white;
+}
+
+
+/*GRIDS*/
+.square {
+  border: 1px solid white;
+  height: 46px;
 }
 
 .gameboard {
@@ -122,9 +94,32 @@ button, .btn {
   max-height: 100%;
 }
 
+.all-letters-col {
+  padding-top: 110px;
+}
+
+.one-letter {
+  line-height: 39px;
+}
+
+.col-md-11 {
+  padding: 0px;
+}
+
+.one-number {
+  margin-left: 40px;
+}
+
+.all-numbers-row {
+  margin-bottom: 5px;
+}
+
+
+/*MODALS*/
 #about { 
   color: black;
   font-family: 'Press Start 2P', cursive;
+  text-align: left
  }
 
 #AboutModalLabel {
@@ -139,4 +134,15 @@ button, .btn {
 #InstructionsModalLabel {
   color: black;
   font-family: 'Press Start 2P', cursive;
+}
+
+.instructions {
+  color: black;
+  font-family: 'Press Start 2P', cursive;
+  text-align: left;
+  margin-bottom: 15px
+}
+
+.outcome-footer {
+  justify-content: center;
 }

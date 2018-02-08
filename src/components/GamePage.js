@@ -151,11 +151,11 @@ class GamePage extends Component {
               <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
               <br/>
               <ul>
-                <p>Carrier - <img className="squares" src={FiveSquare}/></p>
-                <p>Battleship - <img className="squares" src={FourSquare}/></p>
-                <p>Cruiser - <img className="squares" src={ThreeSquare}/></p>
-                <p>Submarine - <img className="squares" src={ThreeSquare}/></p>
-                <p>Destroyer - <img className="squares" src={TwoSquare}/></p>
+                <p>Carrier - <img className="squares" src={FiveSquare} alt="FiveSquare"/></p>
+                <p>Battleship - <img className="squares" src={FourSquare} alt="FourSquare"/></p>
+                <p>Cruiser - <img className="squares" src={ThreeSquare} alt="ThreeSquare"/></p>
+                <p>Submarine - <img className="squares" src={ThreeSquare} alt="ThreeSquare"/></p>
+                <p>Destroyer - <img className="squares" src={TwoSquare} alt="TwoSquare"/></p>
               </ul>
               <br/>
               <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
@@ -173,14 +173,11 @@ class GamePage extends Component {
           <div className="col-12 col-md-6">
             <h2>High Scores</h2>
             <hr/>
-              <ul>
-                <h4>KJE - 850</h4>
-                <h4>SJD - 740</h4>
-                <h4>DBP - 720</h4>
-                <h4>AML - 690</h4>
-              </ul>
+              <h4>KJE - 850</h4>
+              <h4>SJD - 740</h4>
+              <h4>DBP - 720</h4>
+              <h4>AML - 690</h4>
           </div>
-
           <div className="col-12 col-md-6">
             <h2>Guesses</h2>
             <hr/>

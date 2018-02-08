@@ -5,9 +5,6 @@ import Header from './components/Header.js';
 
 
 class App extends Component {
-  constructor() {
-    super();
-  }
 
   render() {
     return (
