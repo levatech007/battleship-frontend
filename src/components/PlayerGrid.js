@@ -66,6 +66,7 @@ class PlayerGrid extends Component {
      }).then((json) => {
        if (json.p2_hits >= 6) {
          console.log("You lose!")
+         this.props.isGameFinished
          // this.setState({game_finished: true});
        } else {
          console.log(json.p1_hits);
