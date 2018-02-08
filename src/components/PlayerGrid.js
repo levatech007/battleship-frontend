@@ -5,6 +5,7 @@ class PlayerGrid extends Component {
     super();
     this.state = {
       board : [[]],
+      game_finished: false,
     }
     this.onBoxClick = this.onBoxClick.bind(this);
     this.opponentGuess = this.opponentGuess.bind(this);
@@ -50,10 +51,12 @@ class PlayerGrid extends Component {
    }).then((res) => {
      return res.json();
    }).then((response) => {
-     console.log(response);
        let copiedBoard = this.state.board.slice();
-       if(response) {
-         copiedBoard[response[0]][response[1]] = 'yellow'
+       if(response[1] === "match") {
+         let matchIdx = response[0];
+         copiedBoard[matchIdx[0]][matchIdx[1]] = 'red'
+       } else {
+         copiedBoard[response[0]][response[1]] = 'gray'
        }
          this.setState({
            board: copiedBoard,
@@ -66,7 +69,6 @@ class PlayerGrid extends Component {
      }).then((json) => {
        if (json.p2_hits >= 6) {
          console.log("You lose!")
-         // this.setState({game_finished: true});
        } else {
          console.log(json.p1_hits);
          console.log(json.p2_hits);

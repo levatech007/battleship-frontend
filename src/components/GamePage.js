@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import OutcomeModal from './OutcomeModal';
 import PlayerGrid from './PlayerGrid';
 import OpponentGrid from './OpponentGrid';
-// import OutcomePage from './OutcomePage';
 
 class GamePage extends Component {
   constructor() {
@@ -125,7 +124,7 @@ class GamePage extends Component {
               </div>
             </div>
           </div>
-          
+
           {gameStarted ? (
             <div className="col-md-6">
               <div className="row">
@@ -141,15 +140,15 @@ class GamePage extends Component {
                   <h2 className="sink-enemy">Sink your enemy</h2>
                   <div className="row all-numbers-row">
                   {numbers.map((eachNumber, idx) => {
-                      return <div key={ idx } className="col-md-1">
-                                <div>
+                      return <div className="col-md-1">
+                                <div key={ idx }>
                                   <h5 className="one-number">{eachNumber}</h5>
                                 </div>
                               </div>
                       })
                     }
                   </div>
-                  <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
+                  <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} showOutcomeModal={this.showOutcomeModal} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)}/>
                 </div>
               </div>
             </div>

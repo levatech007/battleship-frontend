@@ -60,7 +60,6 @@ class OpponentGrid extends Component {
         }).then((json) => {
           if (json.p1_hits >= 6) {
             console.log("You win!")
-            this.setState({game_finished: true});
           } else {
             console.log(json.p1_hits);
             console.log(json.p2_hits);
