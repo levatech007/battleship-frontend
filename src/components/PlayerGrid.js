@@ -39,7 +39,7 @@ class PlayerGrid extends Component {
   opponentGuess() {
    console.log("opponentGuess");
    let currentGameID = this.props.gameIdFromGamePage;
-   fetch(`http://localhost:8080/api/games/${currentGameID}`, {
+   fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`, {
      method: 'PUT',
      headers: {
        'Accept': 'application/json',
@@ -63,7 +63,7 @@ class PlayerGrid extends Component {
          });
    });
 
-   fetch(`http://localhost:8080/api/games/${currentGameID}`)
+   fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`)
      .then((res) => {
        return res.json(); // res cannot be read, need to convert to json
      }).then((json) => {

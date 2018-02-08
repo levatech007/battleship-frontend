@@ -34,7 +34,7 @@ class GamePage extends Component {
 
   hasClickedToPlay() {
     let currentGameID = this.props.match.params.game_id;
-    fetch(`http://localhost:8080/api/games/${currentGameID}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -112,8 +112,8 @@ class GamePage extends Component {
                 <h2>Your gameboard</h2>
                 <div className="row all-numbers-row">
                   {numbers.map((eachNumber, idx) => {
-                      return <div className="col-md-1">
-                                <div key={ idx }>
+                      return <div key={ idx } className="col-md-1">
+                                <div>
                                   <h5 className="one-number">{eachNumber}</h5>
                                 </div>
                               </div>
@@ -140,7 +140,7 @@ class GamePage extends Component {
                   <h2 className="sink-enemy">Sink your enemy</h2>
                   <div className="row all-numbers-row">
                   {numbers.map((eachNumber, idx) => {
-                      return <div className="col-md-1" key={ idx }>
+                      return <div className="col-md-1">
                                 <div key={ idx }>
                                   <h5 className="one-number">{eachNumber}</h5>
                                 </div>

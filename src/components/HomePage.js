@@ -10,7 +10,7 @@ class HomePage extends Component {
   }
 
   hasClickedEnterButton() {
-    fetch("http://localhost:8080/api/games", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
