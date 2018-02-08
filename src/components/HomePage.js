@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import GamePage from './GamePage.js';
 import Ship from './battleship-with-pixels.png';
 
 class HomePage extends Component {
   constructor() {
     super();
-    this.state = {
-      lastGameCreated: {}      
-    }
 
     this.hasClickedEnterButton = this.hasClickedEnterButton.bind(this)
   }
 
-  componentDidMount() {
+  hasClickedEnterButton() {
     fetch("http://localhost:8080/api/games", {
       method: "POST",
       headers: {
@@ -26,16 +22,8 @@ class HomePage extends Component {
     }).then((res) => {
       return res.json()
     }).then((newEmptyGame) => {
-      this.setState({
-        lastGameCreated: newEmptyGame
-      });
-      console.log("new empty game - ", this.state.lastGameCreated)
+      this.props.history.push(`/gamepage/${newEmptyGame._id}`)
     })
-
-  }
-
-  hasClickedEnterButton() {
-    
   }
 
   render() {
@@ -43,12 +31,12 @@ class HomePage extends Component {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <img id="homepage-ship" src={Ship} alt="battleship"/>
+            <img id="homepage-ship" src={ Ship } alt="battleship"/>
           </div>
         </div>
         <div className="row">
           <div className="col-md-12">
-            <Link to={ `/gamepage/${this.state.lastGameCreated._id}` } onClick={ () => this.hasClickedEnterButton()} className="btn btn-outline-success btn-lg">ENTER</Link>
+            <button onClick={ this.hasClickedEnterButton } className="btn btn-outline-success btn-lg">ENTER</button>
           </div>
         </div>
       </div>
