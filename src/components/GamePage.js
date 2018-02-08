@@ -60,9 +60,10 @@ class GamePage extends Component {
     });
   }
 
-  gameFinished() {
+  gameFinished(message) {
     this.setState({
-      game_finished: true
+      game_finished: true, 
+      outcome: message
     })
   }
 
@@ -105,7 +106,7 @@ class GamePage extends Component {
           </div>
         </div>
         <div>
-          { this.state.game_finished ? <OutcomeModal show={ this.state.showOutcome } close={ this.closeOutcomeModal } /> : null}
+          { this.state.game_finished ? <OutcomeModal close={this.closeOutcomeModal} result={this.state.outcome} /> : null}
         </div>
         <div className="row">
           <div className="col-12 col-md-12 col-lg-6">
