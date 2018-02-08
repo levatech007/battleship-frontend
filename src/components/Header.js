@@ -44,14 +44,14 @@ class Header extends Component {
       <div>
         <header className="App-header">
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-12">
               <h1 className="App-title">Battleship</h1>
             </div>
           </div>
           { this.state.showAboutModal ? <AboutModal close={ this.closeAboutModal }/> : null }
           { this.state.showInstructionsModal ? <InstructionsModal close={ this.closeInstructionsModal }/> : null }
           <div className="row">
-            <div className="col-md-12 text-right">
+            <div className="col-12 text-right">
               <button onClick={ this.showAboutModal } ref="about" className="btn btn-secondary btn-sm about-button">About</button>
               <button onClick={ this.showInstructionsModal } ref="instructions" className="btn btn-secondary btn-sm" >Instructions</button>
             </div>

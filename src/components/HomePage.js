@@ -25,17 +25,17 @@ class HomePage extends Component {
       this.props.history.push(`/gamepage/${newEmptyGame._id}`)
     })
   }
-  
+
   render() {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-12">
             <img id="homepage-ship" src={ Ship } alt="battleship"/>
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-12">
             <button onClick={ this.hasClickedEnterButton } className="btn btn-outline-success btn-lg">ENTER</button>
           </div>
         </div>
