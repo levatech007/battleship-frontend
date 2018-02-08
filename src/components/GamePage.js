@@ -150,8 +150,8 @@ class GamePage extends Component {
                   <h2 className="sink-enemy">Sink the enemy</h2>
                   <div className="row all-numbers-row">
                   {numbers.map((eachNumber, idx) => {
-                      return <div className="col-1">
-                                <div key={ idx }>
+                      return <div key={ idx } className="col-1">
+                                <div>
                                   <h5 className="one-number">{eachNumber}</h5>
                                 </div>
                               </div>
