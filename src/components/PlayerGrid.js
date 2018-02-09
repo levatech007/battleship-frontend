@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 class PlayerGrid extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     let gameBoard = [];
     for(let i = 0; i < 10; i++) {
       let gameRow = new Array(10);
