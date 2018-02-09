@@ -20,6 +20,7 @@ class GamePage extends Component {
       clickedStartGame: false,
       playerBoxesClicked: [],
     }
+    // should be fetching game state, or using a passed prop (fetching will be easier in componentDidMount)
 
     this.hasClickedToPlay = this.hasClickedToPlay.bind(this);
     this.closeOutcomeModal = this.closeOutcomeModal.bind(this);
@@ -34,19 +35,12 @@ class GamePage extends Component {
 
   hasClickedToPlay() {
     let currentGameID = this.props.match.params.game_id;
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`, {
-        method: 'PUT',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          p1_positions: this.state.playerBoxesClicked
-        })
-      }).then((res) => {
-        return res.json();
-      }).then((updatedPlayerShips) => {
-    });
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        p1_positions: this.state.playerBoxesClicked
+      })
+    })
 
     this.setState({
       clickedStartGame: true
@@ -55,7 +49,8 @@ class GamePage extends Component {
 
   gameFinished(message) {
     this.setState({
-      game_finished: true, 
+      // variable name should be camel case in JS
+      game_finished: true,
       showOutcomeModal: true,
       outcome: message
     })
@@ -63,15 +58,63 @@ class GamePage extends Component {
 
   closeOutcomeModal() {
     this.setState({
-      showOutcomeModal: false,
-      game_finished: false
+      showOutcomeModal: false
     })
   }
 
+  // i might call this onClickOpponentBox
   allOpponentBoxClicks(row, column)  {
     this.setState({
       allOpponentBoxClicks: [[row, column]].concat(this.state.allOpponentBoxClicks)
     })
+  }
+
+  getRightSide(letters, numbers) {
+    if (this.state.clickedStartGame) {
+      return (<div className="col-12 col-md-12 col-lg-6">
+        <div className="row">
+          <div className="col-1 all-letters-col">
+          {letters.map((eachLetter, idx) => {
+              return <div key={ idx } className="col-12">
+                <h5 className="one-letter">{eachLetter}</h5>
+                </div>
+              })
+            }
+          </div>
+          <div className="col-11">
+            <h2 className="sink-enemy">Sink the enemy</h2>
+            <div className="row all-numbers-row">
+            {numbers.map((eachNumber, idx) => {
+                return <div key={ idx } className="col-1">
+                          <div>
+                            <h5 className="one-number">{eachNumber}</h5>
+                          </div>
+                        </div>
+                })
+              }
+            </div>
+            <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} showOutcomeModal={this.showOutcomeModal} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)} isGameFinished={this.gameFinished}/>
+          </div>
+        </div>
+      </div>);
+    } else {
+      return (
+      <div className="col-12 col-md-12 col-lg-6">
+        <h2>Place your battleships!</h2>
+        <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
+        <br/>
+        <ul>
+          <p>Carrier - <img className="squares" src={FiveSquare} alt="FiveSquare"/></p>
+          <p>Battleship - <img className="squares" src={FourSquare} alt="FourSquare"/></p>
+          <p>Cruiser - <img className="squares" src={ThreeSquare} alt="ThreeSquare"/></p>
+          <p>Submarine - <img className="squares" src={ThreeSquare} alt="ThreeSquare"/></p>
+          <p>Destroyer - <img className="squares" src={TwoSquare} alt="TwoSquare"/></p>
+        </ul>
+        <br/>
+        <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
+      </div>
+    );
+    }
   }
 
   render() {
@@ -94,21 +137,21 @@ class GamePage extends Component {
           <div className="col-12 col-md-12 col-lg-6">
             <div className="row">
               <div className="col-1 all-letters-col">
-                {letters.map((eachLetter, idx) => {
-                    return <div key={ idx } className="col-12">
-                      <h5 className="one-letter">{eachLetter}</h5>
-                      </div>
-                    })
-                  }
+                <div className="row">
+                  {letters.map((eachLetter, idx) => {
+                      return <div key={ idx } className="col-12">
+                        <h5 className="one-letter">{eachLetter}</h5>
+                        </div>
+                      })
+                    }
+                  </div>
               </div>
               <div className="col-11">
                 <h2>Your gameboard</h2>
                 <div className="row all-numbers-row">
                   {numbers.map((eachNumber, idx) => {
                     return <div key={ idx } className="col-1">
-                              <div>
-                                <h5 className="one-number">{eachNumber}</h5>
-                              </div>
+                              <h5 className="one-number">{eachNumber}</h5>
                             </div>
                     })
                   }
@@ -118,49 +161,7 @@ class GamePage extends Component {
             </div>
           </div>
 
-          {gameStarted ? (
-            <div className="col-12 col-md-12 col-lg-6">
-              <div className="row">
-                <div className="col-1 all-letters-col">
-                {letters.map((eachLetter, idx) => {
-                    return <div key={ idx } className="col-12">
-                      <h5 className="one-letter">{eachLetter}</h5>
-                      </div>
-                    })
-                  }
-                </div>
-                <div className="col-11">
-                  <h2 className="sink-enemy">Sink the enemy</h2>
-                  <div className="row all-numbers-row">
-                  {numbers.map((eachNumber, idx) => {
-                      return <div key={ idx } className="col-1">
-                                <div>
-                                  <h5 className="one-number">{eachNumber}</h5>
-                                </div>
-                              </div>
-                      })
-                    }
-                  </div>
-                  <OpponentGrid gameIdFromGamePage={this.props.match.params.game_id} showOutcomeModal={this.showOutcomeModal} allOpponentBoxClicks={this.allOpponentBoxClicks.bind(this)} isGameFinished={this.gameFinished}/>
-                </div>
-              </div>
-            </div>
-            ) : (
-            <div className="col-12 col-md-12 col-lg-6">
-              <h2>Place your battleships!</h2>
-              <h5>Click the squares on your board to place your ships then click 'Start Game'</h5>
-              <br/>
-              <ul>
-                <p>Carrier - <img className="squares" src={FiveSquare} alt="FiveSquare"/></p>
-                <p>Battleship - <img className="squares" src={FourSquare} alt="FourSquare"/></p>
-                <p>Cruiser - <img className="squares" src={ThreeSquare} alt="ThreeSquare"/></p>
-                <p>Submarine - <img className="squares" src={ThreeSquare} alt="ThreeSquare"/></p>
-                <p>Destroyer - <img className="squares" src={TwoSquare} alt="TwoSquare"/></p>
-              </ul>
-              <br/>
-              <button className="btn btn-outline-success" onClick={ this.hasClickedToPlay }>Start Game</button>
-            </div>
-          )}
+          {this.getRightSide(letters, numbers)}
         </div>
         <br/>
         <div className="row">

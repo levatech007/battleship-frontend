@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Ship from './battleship-with-pixels.png';
 
+/* pick whether you are using semicolons or not */
+
 class HomePage extends Component {
   constructor() {
     super();
@@ -10,14 +12,7 @@ class HomePage extends Component {
 
   hasClickedEnterButton() {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games`, {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        game_finished: false,
-      })
+      method: "POST"
     }).then((res) => {
       return res.json()
     }).then((newEmptyGame) => {
