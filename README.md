@@ -6,6 +6,7 @@
 
 
 ## Built by
+<!-- include links to your profiles, include link to frontend, make this actually contain the information required -->
 Kyle Easton
 Sherif Ismail
 Sunny Wang
