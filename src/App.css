@@ -25,6 +25,7 @@ body {
 }
 
 /*GENERAL*/
+/* do not use tag names for CSS. use classes. */
 h1 {
   font-family: 'Press Start 2P', cursive;
   color: yellow;
@@ -50,6 +51,7 @@ h5 {
   color: white;
 }
 
+/* bad and also inconsistent */
 p, h3 {
   font-family: 'Press Start 2P', cursive;
   color: white;
@@ -74,7 +76,7 @@ button, .btn {
 }
 
 #homepage-ship {
-  width: 800px; 
+  width: 800px;
   height: 500px;
 }
 
@@ -116,12 +118,13 @@ hr {
 
 
 /*MODALS*/
-#about { 
+#about {
   color: black;
   font-family: 'Press Start 2P', cursive;
   text-align: left
  }
 
+/* do not use IDs for CSS. use classes. */
 #AboutModalLabel {
   color: black;
   font-family: 'Press Start 2P', cursive;

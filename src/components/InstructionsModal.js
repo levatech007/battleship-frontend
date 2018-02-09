@@ -15,11 +15,11 @@ class InstructionsModal extends Component {
               </div>
               <div className="modal-body">
                 <ol id="instructions">
-                  <li className="instructions">Place your ships by clicking squares on your gameboard.</li> 
-                  <li className="instructions">After you have placed your ships, click the 'Start Game' button.</li> 
-                  <li className="instructions">Click the enemy grid to make a guess.</li> 
-                  <li className="instructions">After each guess, click the button below the grids to allow the opponent to guess your ship locations.</li> 
-                  <li className="instructions">The first player to make 17 hits wins the game.</li> 
+                  <li className="instructions">Place your ships by clicking squares on your gameboard.</li>
+                  <li className="instructions">After you have placed your ships, click the 'Start Game' button.</li>
+                  <li className="instructions">Click the enemy grid to make a guess.</li>
+                  <li className="instructions">After each guess, click the button below the grids to allow the opponent to guess your ship locations.</li>
+                  <li className="instructions">The first player to make 17 hits wins the game.</li>
                 </ol>
               </div>
               <div className="modal-footer">
