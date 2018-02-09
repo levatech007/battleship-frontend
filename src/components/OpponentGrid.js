@@ -42,40 +42,43 @@ class OpponentGrid extends Component {
       let copiedBoard = this.state.board.slice();
       if(matchWasFound) {
         copiedBoard[row][column] = 'red'
-        } else {
-        copiedBoard[row][column] = 'gray'
-        }
-        this.setState({
-          board: copiedBoard,
-        });
-      })
+      } else {
+      copiedBoard[row][column] = 'gray'
+      }
+      this.setState({
+        board: copiedBoard,
+      });
+    })
 
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`)
-        .then((res) => {
-          return res.json(); // res cannot be read, need to convert to json
-        }).then((json) => {
-          if (json.p1_hits >= 16) {
-            let message = "You win!";
-            this.props.isGameFinished(message)
-          } else {
-            console.log(json.p1_hits);
-            console.log(json.p2_hits);
+    // rather than making 2 requests, should just send information about the game as response to the PUT request
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`)
+      .then((res) => {
+        return res.json(); // res cannot be read, need to convert to json
+      }).then((json) => {
+        if (json.p1_hits >= 16) {
+          let message = "You win!";
+          this.props.isGameFinished(message)
+        } else {
+          console.log(json.p1_hits);
+          console.log(json.p2_hits);
         }
 
     });
+    this.props.allOpponentBoxClicks(row, column)
   }
 
   render() {
     return (
       <div id="your-gameboard" className="gameboard">
           {this.state.board.map((oneRow, rowIdx) => {
-            return( <div key={ rowIdx } className='row justify-content-center'>
+            return (
+              <div key={ rowIdx } className='row justify-content-center'>
               {
                 oneRow.map((oneSquare, colIdx) => {
-                  return( <div key={ colIdx } className='col-1 square' style={ {backgroundColor: oneSquare }} onClick={ () => {this.onBoxClick(rowIdx, colIdx); this.props.allOpponentBoxClicks(rowIdx, colIdx)} }></div> )
+                  return( <div key={ colIdx } className='col-1 square' style={ {backgroundColor: oneSquare }} onClick={ () => {this.onBoxClick(rowIdx, colIdx)} }></div> )
                 })
               }
-              </div>)
+              </div>);
             })
           }
       </div>
