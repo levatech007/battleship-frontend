@@ -3,25 +3,19 @@ import React, { Component } from 'react';
 class PlayerGrid extends Component {
   constructor() {
     super();
-    this.state = {
-      board : [[]],
-      game_finished: false,
-      outcome: ''
-    }
-    this.onBoxClick = this.onBoxClick.bind(this);
-    this.opponentGuess = this.opponentGuess.bind(this);
-  }
-
-  componentWillMount() {
     let gameBoard = [];
     for(let i = 0; i < 10; i++) {
       let gameRow = new Array(10);
       gameRow.fill(0)
       gameBoard.push(gameRow)
     }
-    this.setState({
-      board: gameBoard,
-    })
+    this.state = {
+      board : gameBoard,
+      game_finished: false,
+      outcome: ''
+    }
+    this.onBoxClick = this.onBoxClick.bind(this);
+    this.opponentGuess = this.opponentGuess.bind(this);
   }
 
   onBoxClick(row, column) {
@@ -33,7 +27,7 @@ class PlayerGrid extends Component {
       });
     }
   }
-  
+
   opponentGuess() {
    console.log("opponentGuess");
    let currentGameID = this.props.gameIdFromGamePage;
