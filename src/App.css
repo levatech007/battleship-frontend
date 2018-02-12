@@ -1,5 +1,8 @@
 body {
   background: black;
+  margin: 0;
+  padding: 0;
+  font-family: 'Press Start 2P', cursive;
 }
 
 /*HEADER*/
@@ -8,30 +11,20 @@ body {
 }
 
 .App-header {
-  background-color: black;
   height: 150px;
   padding: 20px;
-  color: white;
 }
 
 .App-title {
   font-size: 3.5em;
-  color: white;
-}
-
-#about-link {
-  margin-right: 25px;
-  color: blue;
 }
 
 /*GENERAL*/
-h1 {
-  font-family: 'Press Start 2P', cursive;
+.hot-water {
   color: yellow;
 }
 
-h2 {
-  font-family: 'Press Start 2P', cursive;
+.section-headings {
   margin-top: 30px;
   color: blue;
 }
@@ -40,40 +33,19 @@ h2 {
   color: orange;
 }
 
-h4 {
-  font-family: 'Press Start 2P', cursive;
+.white-text {
   color: white;
 }
 
-h5 {
-  font-family: 'Press Start 2P', cursive;
-  color: white;
-}
-
-p, h3 {
-  font-family: 'Press Start 2P', cursive;
-  color: white;
-}
-
-ul {
-  font-family: 'Press Start 2P', cursive;
-  color: white;
+.ship-options {
   text-align: right;
 }
 
-a {
-  font-family: 'Press Start 2P', cursive;
-  text-decoration: none;
-  color: white;
-  font-size: 20px;
-}
-
-button, .btn {
-  font-family: 'Press Start 2P', cursive;
+.btn {
   margin: 5px;
 }
 
-#homepage-ship {
+.homepage-ship {
   width: 800px; 
   height: 500px;
 }
@@ -102,10 +74,6 @@ hr {
   line-height: 39px;
 }
 
-.col-md-11 {
-  padding: 0px;
-}
-
 .one-number {
   margin-left: 40px;
 }
@@ -116,30 +84,24 @@ hr {
 
 
 /*MODALS*/
-#about { 
+.modal-title {
   color: black;
-  font-family: 'Press Start 2P', cursive;
-  text-align: left
- }
+}
 
-#AboutModalLabel {
-  color: black;
-  font-family: 'Press Start 2P', cursive;
+.modal-text {
+  color: black;  
+  text-align: left
 }
 
 .about-button {
   margin-right: 10px;
 }
 
-#InstructionsModalLabel {
-  color: black;
-  font-family: 'Press Start 2P', cursive;
+.about-link {
+  color: blue;
 }
 
 .instructions {
-  color: black;
-  font-family: 'Press Start 2P', cursive;
-  text-align: left;
   margin-bottom: 15px
 }
 
