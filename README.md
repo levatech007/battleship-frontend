@@ -17,9 +17,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * Hosting: Heroku
 
 ### Links
-[See it live on Heroku](https://play-battleship-game.herokuapp.com/)
-[Github FE](https://github.com/levatech007/battleship-frontend)
-[Github BE](https://github.com/kjkeaston/battleship-backend)
+* [See it live on Heroku](https://play-battleship-game.herokuapp.com/)
+* [Github FE](https://github.com/levatech007/battleship-frontend)
+* [Github BE](https://github.com/kjkeaston/battleship-backend)
 
 ### Planned Features
 * Requiring user and computer to add ships as adjacent squares
