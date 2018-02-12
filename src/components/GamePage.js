@@ -29,7 +29,7 @@ class GamePage extends Component {
   sendBoxClick(row, column) {
     this.setState({
       playerBoxesClicked: this.state.playerBoxesClicked.concat([[row, column]])
-    })
+    });
   }
 
   hasClickedToPlay() {
@@ -58,20 +58,20 @@ class GamePage extends Component {
       game_finished: true, 
       showOutcomeModal: true,
       outcome: message
-    })
+    });
   }
 
   closeOutcomeModal() {
     this.setState({
       showOutcomeModal: false,
       game_finished: false
-    })
+    });
   }
 
   allOpponentBoxClicks(row, column)  {
     this.setState({
       allOpponentBoxClicks: [[row, column]].concat(this.state.allOpponentBoxClicks)
-    })
+    });
   }
 
   render() {
@@ -172,7 +172,7 @@ class GamePage extends Component {
         <div className="row">
           <div className="col-12 col-md-6">
             <h2 className="section-headings">High Scores</h2>
-            <hr/>
+            <hr className="white-line" />
               <h4 className="white-text">KJE - 850</h4>
               <h4 className="white-text">SJD - 740</h4>
               <h4 className="white-text">DBP - 720</h4>
@@ -180,7 +180,7 @@ class GamePage extends Component {
           </div>
           <div className="col-12 col-md-6">
             <h2 className="section-headings">Guesses</h2>
-            <hr/>
+            <hr className="white-line" />
             <div className="row">
               {this.state.allOpponentBoxClicks.map((eachGuess, idx) => {
                 return <div key={ idx } className="col-3">

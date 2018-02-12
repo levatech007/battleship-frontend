@@ -18,25 +18,25 @@ class Header extends Component {
   showAboutModal() {
     this.setState({
       showAboutModal: true
-    })
+    });
   }
 
   showInstructionsModal() {
     this.setState({
       showInstructionsModal: true
-    }) 
+    });
   }
 
   closeAboutModal() {
     this.setState({
       showAboutModal: false
-    })
+    });
   }
 
   closeInstructionsModal() {
     this.setState({
       showInstructionsModal: false
-    })
+    });
   }
 
   render() {
