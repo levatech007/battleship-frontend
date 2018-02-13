@@ -12,7 +12,6 @@ class App extends Component {
         <Header />
         <div className='container'>
           { MyRoutes }
-           
         </div>
       </div>
     );

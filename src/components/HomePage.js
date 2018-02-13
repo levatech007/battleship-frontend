@@ -30,7 +30,7 @@ class HomePage extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <img id="homepage-ship" src={ Ship } alt="battleship"/>
+            <img className="homepage-ship" src={ Ship } alt="battleship"/>
           </div>
         </div>
         <div className="row">

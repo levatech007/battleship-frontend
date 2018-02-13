@@ -6,6 +6,7 @@ import GamePage from '../components/GamePage.js';
 export default (
   <Switch>
     <Route exact path='/' component={ HomePage }/>
-    <Route path='/gamepage/:game_id' component={ GamePage }/>
+    <Route exact path='/gamepage/:game_id' component={ GamePage }/>
   </Switch>
   )
+  

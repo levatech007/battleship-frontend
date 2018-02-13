@@ -18,25 +18,25 @@ class Header extends Component {
   showAboutModal() {
     this.setState({
       showAboutModal: true
-    })
+    });
   }
 
   showInstructionsModal() {
     this.setState({
       showInstructionsModal: true
-    }) 
+    });
   }
 
   closeAboutModal() {
     this.setState({
       showAboutModal: false
-    })
+    });
   }
 
   closeInstructionsModal() {
     this.setState({
       showInstructionsModal: false
-    })
+    });
   }
 
   render() {
@@ -45,7 +45,7 @@ class Header extends Component {
         <header className="App-header">
           <div className="row">
             <div className="col-12">
-              <h1 className="App-title">Battleship</h1>
+              <h1 className="App-title white-text">Battleship</h1>
             </div>
           </div>
           { this.state.showAboutModal ? <AboutModal close={ this.closeAboutModal }/> : null }

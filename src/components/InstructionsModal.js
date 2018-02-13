@@ -8,13 +8,13 @@ class InstructionsModal extends Component {
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="InstructionsModalLabel">Instructions</h5>
+                <h5 className="modal-title">Instructions</h5>
                 <button type="button" className="close" onClick={ this.props.close }>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div className="modal-body">
-                <ol id="instructions">
+                <ol className="modal-text">
                   <li className="instructions">Place your ships by clicking squares on your gameboard.</li> 
                   <li className="instructions">After you have placed your ships, click the 'Start Game' button.</li> 
                   <li className="instructions">Click the enemy grid to make a guess.</li> 
