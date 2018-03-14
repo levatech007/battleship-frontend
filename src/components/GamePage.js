@@ -41,7 +41,7 @@ class GamePage extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          p1_positions: this.state.playerBoxesClicked
+          playerShipLocations: this.state.playerBoxesClicked
         })
       }).then((res) => {
         return res.json();
@@ -55,7 +55,7 @@ class GamePage extends Component {
 
   gameFinished(message) {
     this.setState({
-      game_finished: true, 
+      game_finished: true,
       showOutcomeModal: true,
       outcome: message
     });
