@@ -33,7 +33,7 @@ class OpponentGrid extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        p1_guesses: singleGuess
+        playerGuesses: singleGuess
       })
     }).then((res) => {
       return res.json();
@@ -52,14 +52,14 @@ class OpponentGrid extends Component {
 
       fetch(`${process.env.REACT_APP_BACKEND_URL}/api/games/${currentGameID}`)
         .then((res) => {
-          return res.json(); // res cannot be read, need to convert to json
+          return res.json();
         }).then((json) => {
-          if (json.p1_hits >= 16) {
+          if (json.playerHits >= 16) {
             let message = "You win!";
             this.props.isGameFinished(message)
           } else {
-            console.log(json.p1_hits);
-            console.log(json.p2_hits);
+            console.log(json.playerHits);
+            console.log(json.computerHits);
         }
 
     });

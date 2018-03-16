@@ -33,7 +33,7 @@ class PlayerGrid extends Component {
       });
     }
   }
-  
+
   opponentGuess() {
    console.log("opponentGuess");
    let currentGameID = this.props.gameIdFromGamePage;
@@ -44,7 +44,7 @@ class PlayerGrid extends Component {
        'Content-Type': 'application/json',
      },
      body: JSON.stringify({
-       computerPlay: true
+       computerTurn: true
      })
    }).then((res) => {
      return res.json();
@@ -65,13 +65,13 @@ class PlayerGrid extends Component {
      .then((res) => {
        return res.json(); // res cannot be read, need to convert to json
      }).then((json) => {
-       if (json.p2_hits >= 16) {
+       if (json.computerHits >= 16) {
          let message = "You lose!";
          this.props.isGameFinished(message)
 
        } else {
-         console.log(json.p1_hits);
-         console.log(json.p2_hits);
+         console.log(json.playerHits);
+         console.log(json.computerHits);
        }
     })
  }
